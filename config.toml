@@ -1,0 +1,4 @@
+baseURL = 'https://miura.io/'
+languageCode = 'ja-JP'
+title = 'Miura Computer Club'
+theme = 'terminal'

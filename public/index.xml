@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Miura Computer Club</title>
+    <link>https://miura.io/</link>
+    <description>Recent content on Miura Computer Club</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-JP</language>
+    <lastBuildDate>Thu, 10 Feb 2022 16:35:59 +0900</lastBuildDate><atom:link href="https://miura.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Miura Computer Club</title>
+      <link>https://miura.io/posts/home/</link>
+      <pubDate>Thu, 10 Feb 2022 16:35:59 +0900</pubDate>
+      
+      <guid>https://miura.io/posts/home/</guid>
+      <description>welcome to mcc</description>
+      <content>&lt;p&gt;welcome to mcc&lt;/p&gt;
+</content>
+    </item>
+    
+  </channel>
+</rss>
