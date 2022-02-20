@@ -2,9 +2,9 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Miura Computer Club</title>
-    <link>https://miura.io/categories/</link>
+    <link>/categories/</link>
     <description>Recent content in Categories on Miura Computer Club</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>ja-JP</language><atom:link href="https://miura.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <language>ja-JP</language><atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

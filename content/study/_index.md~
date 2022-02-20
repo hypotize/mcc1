@@ -1,0 +1,20 @@
++++
+title = "お問い合わせ"
+date = "2022-02-20T16:30:59+09:00"
+author = "Michael Cashen"
+authorTwitter = "michaelcashen" #do not include @
+cover = ""
+tags = ["", ""]
+keywords = ["三浦" ,"コンピュータ", "クラブ", "パソコン", "プログラミング"]
+description = ""
+
+showFullContent = true
+readingTime = false
++++
+
+# お問い合わせ
+
+マイケル
+
+* 080-8858-6099 (日本語可)
+* [michael@hypotize.com](mailto:michael@hypotize.com)

@@ -1,13 +1,28 @@
 +++
-title = "Miura Computer Club" 
-date = "2022-02-10T16:35:59+09:00"
+title = "三浦コンピュータクラブ"
+date = "2022-02-20T16:30:59+09:00"
 author = "Michael Cashen"
 authorTwitter = "michaelcashen" #do not include @
 cover = ""
-tags = ["", ""]
-keywords = ["", ""]
-description = ""
-showFullContent = false
+tags = ["三浦", "コンピュータ", "クラブ", "やるぞ！"]
+keywords = ["三浦" ,"コンピュータ", "クラブ", "パソコン", "プログラミング"]
+description = "三浦コンピュータクラブの概要"
+
+showFullContent = true
 readingTime = false
 +++
-welcome to mcc	
+
+# 三浦コンピュータクラブの概要
+
+三浦コンピュータクラブは三浦市の[ニナイテ](https://www.miuracc.org/)（ベイシアの2階にある三浦市民交流センター）を活動拠点とするコンピュータクラブです。
+子供にコンピュータににふれる機会を与えて、コンピュータを好きになってもらうのが目的です。IT経験豊富な先生が丁寧に教えます。みんなのやりたいを聞きながら、遊びながら、学習します。コンピュータの基本の使い方、中の動き方の基礎など、プログラミング・開発までやっていきます。
+
+## 活動予定
+
+3月27日 (日） 15:15 ~ 16:45 に第一回の集会をやります。
+
+参加してくれる子供および一緒に教える側に立ってくれる先生役も大募集中です。参加費は一回目も、ずっと無料です。コンピュータを用意しますので、手ぶら参加でOKです。持ってこれるノートパソコンがある場合、ぜひもってきてください。対象年齢は10歳くらいから16歳まで。
+
+まったくコンピュータに触れたことがない人でも最初から教えますので、ご安心ください。
+
+参加のご応募は3月20日まで、[このフォーム](https://docs.google.com/forms/d/e/1FAIpQLSfBaUI6Dk1eldubjfTLZT0sF4NpI2XfBbYwAwIZbn33IJQhxQ/viewform)からお願いします。
