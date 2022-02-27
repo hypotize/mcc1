@@ -12,6 +12,8 @@ showFullContent = true
 readingTime = false
 +++
 
+![Hello Miura Robot](/images/robot_transparent.png)
+
 # 三浦コンピュータクラブの概要
 
 三浦コンピュータクラブは三浦市の[ニナイテ](https://www.miuracc.org/)（ベイシアの2階にある三浦市民交流センター）を活動拠点とするコンピュータクラブです。

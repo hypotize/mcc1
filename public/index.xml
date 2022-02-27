@@ -13,8 +13,8 @@
       <pubDate>Wed, 23 Feb 2022 16:30:59 +0900</pubDate>
       
       <guid>/members/michael/</guid>
-      <description>マイケル    重要情報      年齢 43歳   出身・居場所 ニュージーランド出身・三浦市在住   仕事 フリーコンサル   学歴 電気通信大 情報工学科 修士課程修了    </description>
-      <content>&lt;h1 id=&#34;マイケル&#34;&gt;マイケル&lt;/h1&gt;
+      <description>   重要情報      年齢 43歳   出身・居場所 ニュージーランド出身・三浦市在住・都内もよくいます。   仕事 ITコンサル(暇人になりたいけどなれない)   学歴 電気通信大 情報工学科 修士課程修了   好きなパソコン Macを使うのが多いが、一番好きなOSはDebian GNU/Linux    </description>
+      <content>&lt;p&gt;&lt;img src=&#34;/images/michael.png&#34; alt=&#34;Michael&amp;rsquo;s face&#34;&gt;&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -29,15 +29,19 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;出身・居場所&lt;/td&gt;
-&lt;td&gt;ニュージーランド出身・三浦市在住&lt;/td&gt;
+&lt;td&gt;ニュージーランド出身・三浦市在住・都内もよくいます。&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;仕事&lt;/td&gt;
-&lt;td&gt;フリーコンサル&lt;/td&gt;
+&lt;td&gt;ITコンサル(暇人になりたいけどなれない)&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;学歴&lt;/td&gt;
 &lt;td&gt;電気通信大 情報工学科 修士課程修了&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;好きなパソコン&lt;/td&gt;
+&lt;td&gt;Macを使うのが多いが、一番好きなOSはDebian GNU/Linux&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -55,7 +59,8 @@
 参加してくれる子供および一緒に教える側に立ってくれる先生役も大募集中です。参加費は一回目も、ずっと無料です。コンピュータを用意しますので、手ぶら参加でOKです。持ってこれるノートパソコンがある場合、ぜひもってきてください。対象年齢は10歳くらいから16歳まで。
 まったくコンピュータに触れたことがない人でも最初から教えますので、ご安心ください。
 参加のご応募は3月20日まで、このフォームからお願いします。</description>
-      <content>&lt;h1 id=&#34;三浦コンピュータクラブの概要&#34;&gt;三浦コンピュータクラブの概要&lt;/h1&gt;
+      <content>&lt;p&gt;&lt;img src=&#34;/images/robot_transparent.png&#34; alt=&#34;Hello Miura Robot&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;三浦コンピュータクラブの概要&#34;&gt;三浦コンピュータクラブの概要&lt;/h1&gt;
 &lt;p&gt;三浦コンピュータクラブは三浦市の&lt;a href=&#34;https://www.miuracc.org/&#34;&gt;ニナイテ&lt;/a&gt;（ベイシアの2階にある三浦市民交流センター）を活動拠点とするコンピュータクラブです。
 子供にコンピュータににふれる機会を与えて、コンピュータを好きになってもらうのが目的です。IT経験豊富な先生が丁寧に教えます。みんなのやりたいを聞きながら、遊びながら、学習します。コンピュータの基本の使い方、中の動き方の基礎など、プログラミング・開発までやっていきます。&lt;/p&gt;
 &lt;h2 id=&#34;活動予定&#34;&gt;活動予定&lt;/h2&gt;
