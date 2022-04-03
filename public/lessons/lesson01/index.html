@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>レッスン 01 :: Miura Computer Club</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="レッスンの目標 他の人が遊べてちょっと楽しい2Dのミニゲームを作ること！
+勉強すること 下記のゲームの基本の要素が勉強できます。
+ 背景 スプライト (登場人物)　- 動きとかロジック 数学 - ゲームの世界は数学が少し必要  今回のゲームにはでて来ないけど、ゲームの中で大事な要素としては下記のがあります。
+ BGM（音楽） 効果音 ユーザへの遊び方の説明  作る方法 今回は2つの作り方を用意しました:
+ スクラッチを用いて、ビジュアルプログラミングをしていく方法。 Pythonという言語でpygameというゲームライブラリーを用いて、作る方法。  どの方法でも同じゲームを5つのステップでも作っていけます。
+レッスンの進め方  まずは最終形(Step 5)を見てみます。（下記のスクラッチのリンクまたはPythonの動かし方を参照) 次に、Step 1を見てみます。ほぼ何もゲームの要素がありません。ボールが動いているだけです。 Step 2から順番に要素を足したり、修正したりします。そのやり方の見本を見る前に自分なりにやり方を考えたりしてみてください。困ったときだけ、見本を見ましょう。 ちょっとずつ作っていけば、見本と同じゲームができあがります。そこからは自分なりに変更を加えて、自分流のゲームにしましょう。  スクラッチのプロジェクトのリンク    ステップ リンク 追加要素     Step 1 https://scratch.mit.edu/projects/668808854/    Step 2 https://scratch.mit.edu/projects/669495522/ パドルを追加   Step 3 https://scratch.mit.edu/projects/669495836/ ボールがパドルに跳ねる処理   Step 4 https://scratch.mit.edu/projects/669495999/ ゲームオーバーとなる線の追加   Step 5 https://scratch." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="/lessons/lesson01/" />
+
+
+
+
+<link rel="stylesheet" href="/assets/style.css">
+
+  <link rel="stylesheet" href="/assets/green.css">
+
+
+
+<link rel="stylesheet" href="/style.css">
+
+
+<link rel="apple-touch-icon" href="/img/apple-touch-icon-192x192.png">
+
+  <link rel="shortcut icon" href="/img/favicon/green.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+  
+    <meta name="twitter:site" content="" />
+  
+    <meta name="twitter:creator" content="Michael Cashen" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="レッスン 01">
+<meta property="og:description" content="レッスンの目標 他の人が遊べてちょっと楽しい2Dのミニゲームを作ること！
+勉強すること 下記のゲームの基本の要素が勉強できます。
+ 背景 スプライト (登場人物)　- 動きとかロジック 数学 - ゲームの世界は数学が少し必要  今回のゲームにはでて来ないけど、ゲームの中で大事な要素としては下記のがあります。
+ BGM（音楽） 効果音 ユーザへの遊び方の説明  作る方法 今回は2つの作り方を用意しました:
+ スクラッチを用いて、ビジュアルプログラミングをしていく方法。 Pythonという言語でpygameというゲームライブラリーを用いて、作る方法。  どの方法でも同じゲームを5つのステップでも作っていけます。
+レッスンの進め方  まずは最終形(Step 5)を見てみます。（下記のスクラッチのリンクまたはPythonの動かし方を参照) 次に、Step 1を見てみます。ほぼ何もゲームの要素がありません。ボールが動いているだけです。 Step 2から順番に要素を足したり、修正したりします。そのやり方の見本を見る前に自分なりにやり方を考えたりしてみてください。困ったときだけ、見本を見ましょう。 ちょっとずつ作っていけば、見本と同じゲームができあがります。そこからは自分なりに変更を加えて、自分流のゲームにしましょう。  スクラッチのプロジェクトのリンク    ステップ リンク 追加要素     Step 1 https://scratch.mit.edu/projects/668808854/    Step 2 https://scratch.mit.edu/projects/669495522/ パドルを追加   Step 3 https://scratch.mit.edu/projects/669495836/ ボールがパドルに跳ねる処理   Step 4 https://scratch.mit.edu/projects/669495999/ ゲームオーバーとなる線の追加   Step 5 https://scratch." />
+<meta property="og:url" content="/lessons/lesson01/" />
+<meta property="og:site_name" content="Miura Computer Club" />
+
+  
+    <meta property="og:image" content="/img/favicon/green.png">
+  
+
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+
+  <meta property="article:published_time" content="2022-04-03 08:30:00 &#43;0900 JST" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="green">
+
+
+<div class="container center headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    MIURA COMPUTER CLUB
+  </div>
+</a>
+
+    </div>
+    
+      <div class="menu-trigger">menu</div>
+    
+  </div>
+  
+    <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="/">ホーム</a></li>
+        
+      
+        
+          <li><a href="/contact">お問い合わせ</a></li>
+        
+      
+        
+          <li><a href="/study">学習内容</a></li>
+        
+      
+        
+          <li><a href="/members">メンバー紹介</a></li>
+        
+      
+        
+          <li><a href="/lessons">レッスン</a></li>
+        
+      
+      
+    
+
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/">ホーム</a></li>
+      
+    
+      
+        <li><a href="/contact">お問い合わせ</a></li>
+      
+    
+      
+        <li><a href="/study">学習内容</a></li>
+      
+    
+      
+        <li><a href="/members">メンバー紹介</a></li>
+      
+    
+      
+        <li><a href="/lessons">レッスン</a></li>
+      
+    
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<div class="post">
+  <h1 class="post-title">
+    <a href="/lessons/lesson01/">レッスン 01</a></h1>
+  <div class="post-meta">
+    
+      <span class="post-date">
+        2022-04-03
+        
+      </span>
+    
+    
+      <span class="post-author">:: Michael Cashen</span>
+    
+    
+  </div>
+
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        <h1 id="レッスンの目標">レッスンの目標<a href="#レッスンの目標" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>他の人が遊べてちょっと楽しい2Dのミニゲームを作ること！</p>
+<p><img src="/images/lesson1_ss.png" alt="Screen shot of Lesson 1 games"></p>
+<h1 id="勉強すること">勉強すること<a href="#勉強すること" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>下記のゲームの基本の要素が勉強できます。</p>
+<ul>
+<li>背景</li>
+<li>スプライト (登場人物)　 - 動きとかロジック</li>
+<li>数学 - ゲームの世界は数学が少し必要</li>
+</ul>
+<p>今回のゲームにはでて来ないけど、ゲームの中で大事な要素としては下記のがあります。</p>
+<ul>
+<li>BGM（音楽）</li>
+<li>効果音</li>
+<li>ユーザへの遊び方の説明</li>
+</ul>
+<h1 id="作る方法">作る方法<a href="#作る方法" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>今回は2つの作り方を用意しました:</p>
+<ol>
+<li>スクラッチを用いて、ビジュアルプログラミングをしていく方法。</li>
+<li>Pythonという言語でpygameというゲームライブラリーを用いて、作る方法。</li>
+</ol>
+<p>どの方法でも同じゲームを5つのステップでも作っていけます。</p>
+<h1 id="レッスンの進め方">レッスンの進め方<a href="#レッスンの進め方" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<ol>
+<li>まずは最終形(Step 5)を見てみます。（下記のスクラッチのリンクまたはPythonの動かし方を参照)</li>
+<li>次に、Step 1を見てみます。ほぼ何もゲームの要素がありません。ボールが動いているだけです。</li>
+<li>Step 2から順番に要素を足したり、修正したりします。そのやり方の見本を見る前に自分なりにやり方を考えたりしてみてください。困ったときだけ、見本を見ましょう。</li>
+<li>ちょっとずつ作っていけば、見本と同じゲームができあがります。そこからは自分なりに変更を加えて、自分流のゲームにしましょう。</li>
+</ol>
+<h1 id="スクラッチのプロジェクトのリンク">スクラッチのプロジェクトのリンク<a href="#スクラッチのプロジェクトのリンク" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<table>
+<thead>
+<tr>
+<th>ステップ</th>
+<th>リンク</th>
+<th>追加要素</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Step 1</td>
+<td><a href="https://scratch.mit.edu/projects/668808854/">https://scratch.mit.edu/projects/668808854/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>Step 2</td>
+<td><a href="https://scratch.mit.edu/projects/669495522/">https://scratch.mit.edu/projects/669495522/</a></td>
+<td>パドルを追加</td>
+</tr>
+<tr>
+<td>Step 3</td>
+<td><a href="https://scratch.mit.edu/projects/669495836/">https://scratch.mit.edu/projects/669495836/</a></td>
+<td>ボールがパドルに跳ねる処理</td>
+</tr>
+<tr>
+<td>Step 4</td>
+<td><a href="https://scratch.mit.edu/projects/669495999/">https://scratch.mit.edu/projects/669495999/</a></td>
+<td>ゲームオーバーとなる線の追加</td>
+</tr>
+<tr>
+<td>Step 5</td>
+<td><a href="https://scratch.mit.edu/projects/669496257/">https://scratch.mit.edu/projects/669496257/</a></td>
+<td>スコアとスピード調整を追加</td>
+</tr>
+</tbody>
+</table>
+<h1 id="pythonでの開発の進め方">Pythonでの開発の進め方<a href="#pythonでの開発の進め方" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<ul>
+<li>ソースコードを入手。Gitで公開しているので、そのレポジトリをクローンする</li>
+</ul>
+
+
+
+  <div class="collapsable-code">
+    <input id="1" type="checkbox"  />
+    <label for="1">
+      <span class="collapsable-code__language">shell</span>
+      
+      <span class="collapsable-code__toggle" data-label-expand="△" data-label-collapse="▽"></span>
+    </label>
+    <pre class="language-shell" ><code>
+git clone https://github.com/hypotize/mcc1
+</code></pre>
+  </div>
+
+
+<ul>
+<li>python3 で動かす。pygameのインストールが必要な場合、インストールする。今回のレッスンは<code>0403_lesson</code>のディレクトリの下にあります。</li>
+</ul>
+
+
+
+  <div class="collapsable-code">
+    <input id="1" type="checkbox"  />
+    <label for="1">
+      <span class="collapsable-code__language">shell</span>
+      
+      <span class="collapsable-code__toggle" data-label-expand="△" data-label-collapse="▽"></span>
+    </label>
+    <pre class="language-shell" ><code>
+python3 -m pip install pygame
+cd mcc1/0403_lesson
+python3 step5.py
+</code></pre>
+  </div>
+
+
+<p>各ステップは step1.py ~ step5.pyのファイルで作成してあります。</p>
+
+      </div></div>
+
+  
+
+  
+  
+
+  
+</div>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2022 Powered by <a href="http://gohugo.io">Hugo</a></span>
+    
+        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+<script src="/assets/main.js"></script>
+<script src="/assets/prism.js"></script>
+
+
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

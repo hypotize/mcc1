@@ -13,7 +13,7 @@ paginate = 5
   themeColor = "green"
 
   # if you set this to 0, only submenu trigger will be visible
-  showMenuItems = 5
+  showMenuItems = 6
 
   # show selector to switch language
   showLanguageSelector = false
@@ -86,3 +86,8 @@ paginate = 5
       name = "メンバー紹介"
       url = "/members"
       weight = 4      
+    [[menu.main]]
+      identifier = "e"
+      name = "レッスン"
+      url = "/lessons"
+      weight = 5      
