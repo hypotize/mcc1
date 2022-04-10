@@ -3,10 +3,13 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>/lessons/</loc>
-    <lastmod>2022-04-03T08:30:00+09:00</lastmod>
+    <lastmod>2022-04-10T08:30:00+09:00</lastmod>
   </url><url>
     <loc>/</loc>
-    <lastmod>2022-04-03T08:30:00+09:00</lastmod>
+    <lastmod>2022-04-10T08:30:00+09:00</lastmod>
+  </url><url>
+    <loc>/lessons/lesson02/</loc>
+    <lastmod>2022-04-10T08:30:00+09:00</lastmod>
   </url><url>
     <loc>/lessons/lesson01/</loc>
     <lastmod>2022-04-03T08:30:00+09:00</lastmod>
@@ -31,6 +34,9 @@
   </url><url>
     <loc>/posts/home/</loc>
     <lastmod>2022-03-27T16:30:59+09:00</lastmod>
+  </url><url>
+    <loc>/lessons/lesson00/</loc>
+    <lastmod>2022-03-27T08:30:00+09:00</lastmod>
   </url><url>
     <loc>/members/yoshio/</loc>
     <lastmod>2022-02-28T16:00:00+09:00</lastmod>
