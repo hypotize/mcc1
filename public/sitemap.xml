@@ -2,10 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>/lessons/</loc>
-    <lastmod>2022-04-10T08:30:00+09:00</lastmod>
+    <loc>/creations/</loc>
+    <lastmod>2022-04-11T07:30:00+09:00</lastmod>
   </url><url>
     <loc>/</loc>
+    <lastmod>2022-04-11T07:30:00+09:00</lastmod>
+  </url><url>
+    <loc>/creations/creation02/</loc>
+    <lastmod>2022-04-11T07:30:00+09:00</lastmod>
+  </url><url>
+    <loc>/lessons/</loc>
     <lastmod>2022-04-10T08:30:00+09:00</lastmod>
   </url><url>
     <loc>/lessons/lesson02/</loc>
@@ -13,6 +19,9 @@
   </url><url>
     <loc>/lessons/lesson01/</loc>
     <lastmod>2022-04-03T08:30:00+09:00</lastmod>
+  </url><url>
+    <loc>/creations/creation01/</loc>
+    <lastmod>2022-03-28T08:30:00+09:00</lastmod>
   </url><url>
     <loc>/posts/</loc>
     <lastmod>2022-03-27T16:30:59+09:00</lastmod>

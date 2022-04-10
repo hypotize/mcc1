@@ -91,3 +91,8 @@ paginate = 5
       name = "レッスン"
       url = "/lessons"
       weight = 5      
+    [[menu.main]]
+      identifier = "f"
+      name = "作品"
+      url = "/creations"
+      weight = 6      
