@@ -17,4 +17,4 @@ readingTime = false
 マイケル
 
 * 080-8858-6099 (日本語可)
-* [michael@hypotize.com](mailto:michael@hypotize.com)
+* [michael@miura.io](mailto:michael@miura.io)

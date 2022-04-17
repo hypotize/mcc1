@@ -2,9 +2,8 @@
 title = "レッスン 02"
 date = "2022-04-10T08:30:00+09:00"
 author = "Michael Cashen"
-description = ""
-
-showFullContent = true
+description = "いろいろチャレンジ - 曲を作って、絵を描いて、動画も編集して、タイピングも練習してみよう"
+showFullContent = false
 readingTime = false
 +++
 

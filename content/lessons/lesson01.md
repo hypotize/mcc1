@@ -2,9 +2,8 @@
 title = "レッスン 01"
 date = "2022-04-03T08:30:00+09:00"
 author = "Michael Cashen"
-description = ""
-
-showFullContent = true
+description = "スクラッチで作ったゲームをみて、同じゲームをPythonでも見てみよう"
+showFullContent = false
 readingTime = false
 +++
 

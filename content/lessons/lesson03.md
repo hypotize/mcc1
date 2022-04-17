@@ -2,10 +2,10 @@
 title = "レッスン 03"
 date = "2022-04-17T10:30:00+09:00"
 author = "Michael Cashen"
-description = ""
-
-showFullContent = true
+description = "GitHub、Gitとマークダウンの勉強" 
+showFullContent = false
 readingTime = false
+
 +++
 
 # レッスンの目標
@@ -13,6 +13,8 @@ readingTime = false
 
 # 勉強すること
 [GitHub](https://github.com/)というオンラインのソースコード管理ツールのアカウントを作って、自分の自己紹介の文書をそこにコミットします(アップロードします)。ソースコード管理は開発者としてとても大事な作業です。最初は難しいけど、ちょっとずつ慣れましょう。
+
+<!--more-->
 
 # 手順①  GitHubアカウント取得
 1. まずは、ユーザ名を考えましょう。例えば、あなたの名前がyumiなら、ユーザ名を`mcc-yumi`にしましょう。最初のmccはMiura Computer Clubの頭文字ね！他のみんなとかぶらないようにしましょう。

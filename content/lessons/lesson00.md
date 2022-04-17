@@ -2,9 +2,9 @@
 title = "レッスン 00"
 date = "2022-03-27T08:30:00+09:00"
 author = "Michael Cashen"
-description = ""
+description = "自己紹介を作りましょう。"
 
-showFullContent = true
+showFullContent = false
 readingTime = false
 +++
 
@@ -13,6 +13,5 @@ readingTime = false
 
 ![Lesson one - self intro ](/images/lesson0.jpg)
 
-
 # 勉強すること
-パソコンの触り方。画像の作り方。
+パソコンの触り方。画像の作り方。Google SlidesまたはTuxPaintで自己紹介の画像を作ってみよう

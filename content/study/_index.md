@@ -46,6 +46,12 @@ readingTime = false
 
 上級編といっても、少しずつ覚えて行けば、難しくありません。
 
+ - 新しいソフトのインストール・パッケージマネージャ
+   - Debian GNU/Linuxは[apt-get](https://wiki.debian.org/DebianPackageManagement)
+   - Macは[homebrew](https://brew.sh/index_ja)
+   - Windowsは[choco](https://chocolatey.org/)
+ 
+
  - 簡単なAndroidアプリの作成
  - ゲーム開発 (Godotなどのエンジンを用いて)
  - オープンソースとは
