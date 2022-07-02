@@ -18,3 +18,7 @@ readingTime = false
 
 ![Lesson 12 HTML](/images/lesson12.png)
 
+ - 次ははこのファイルをダウンロードして、ZIPファイルを展開してください。[HTML_Quiz.zip](https://club.miura.io/HTML_Quiz.zip)
+  - 初めのページ.htmlを開いてください。いくつかのページでできたクイズです。自分なりに編集してみましょう。編集できたら、隣の人に答えてもらいましょう。
+
+![Lesson 12 HTML](/images/lesson12_2.png)
