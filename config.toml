@@ -106,3 +106,6 @@ paginate = 5
       name = "先生募集"
       url = "/sensei"
       weight = 8      
+
+[markup.goldmark.renderer]
+unsafe = true
