@@ -5,23 +5,26 @@ import random
 import math
 import datetime
 
-# Define some colors
-colors = ((0, 0, 0),       #black
-          (255, 0, 0),     #red
-          (0, 255, 0),     #green
-          (0, 0, 255),     #blue
-          (255, 255, 255)  #white
+# いろをいくつか定義
+colors = ((0, 0, 0),       #黒
+          (255, 0, 0),     #赤
+          (0, 255, 0),     #みどり
+          (0, 0, 255),     #青
+          (255, 255, 255)  #白
           )
 
-#initial color
+#最初のペンキのいろ
 color = 0
 
+#一個の箱の大きさ(ピクセル)
 block_size = 20
+#箱の数(一辺) 
 matrix_size = 30
 
-# intial matrix is all white 
+# 最初は全部白にする (白は4)
 mtrx =  [[4] * matrix_size for i in range(matrix_size)]
 
+# 箱を全部書いていく
 def draw():
     for i in range(matrix_size):
         for j in range(matrix_size):
@@ -29,15 +32,10 @@ def draw():
             pygame.draw.rect(screen,colors[val],[i * block_size, j * block_size, block_size,block_size], 0)
 
 pygame.init()
- 
-# Set the height and width of the screen
 screen = pygame.display.set_mode([block_size * matrix_size, block_size * matrix_size])
-pygame.display.set_caption("Draw")
+pygame.display.set_caption("Miura Paint")
  
-# Loop until the user clicks the close button.
 done = False
- 
-# Used to manage how fast the screen updates
 clock = pygame.time.Clock()
 
 # -------- Main Program Loop -----------
@@ -54,8 +52,10 @@ while not done:
         
         #キーが押されたとき
         if event.type == KEYDOWN:
+            #終了
             if event.key == K_q or event.key == K_ESCAPE:
                 pygame.quit()
+            #色の切り替え 1 ~ 5 までのの色
             if event.key == K_1:
                 color = 0
             if event.key == K_2:
@@ -66,18 +66,21 @@ while not done:
                 color = 3
             if event.key == K_5:
                 color = 4
+            # s で保存
             if event.key == K_s:
                 dt = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
                 filename = "screenshot_" + dt + ".jpg"
                 pygame.image.save(screen ,filename)
-                print("saved to", filename) 
+                print(filename, "で保存しました。") 
 
+        #クリックで描く
         if event.type == pygame.MOUSEBUTTONDOWN:
             pos = pygame.mouse.get_pos()
             col = math.floor(pos[0] / block_size)
             row = math.floor(pos[1] / block_size)
             mtrx[row][col] = color
 
+        #マウスののボタンを押した状態でマウスを動かして、描く
         if event.type == pygame.MOUSEMOTION:
             if pygame.mouse.get_pressed()[0]: 
                 pos = pygame.mouse.get_pos()
@@ -87,6 +90,5 @@ while not done:
             
     draw()
     pygame.display.flip()
-    clock.tick(20)
- 
+    clock.tick(20) 
 pygame.quit()
