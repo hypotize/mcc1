@@ -67,7 +67,7 @@ while not done:
             if event.key == K_5:
                 color = 4
             if event.key == K_s:
-                dt = datetime.datetime.now().strftime("%d%m%Y_%H%M%S")
+                dt = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
                 filename = "screenshot_" + dt + ".jpg"
                 pygame.image.save(screen ,filename)
                 print("saved to", filename) 
