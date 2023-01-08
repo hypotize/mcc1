@@ -1,5 +1,12 @@
 import os
 from inputimeout import inputimeout, TimeoutOccurred
+from sys import platform
+
+def clearConsole():
+        if platform == "win32":
+                os.system('cls')
+        else:
+                os.system('clear')
 
 title = "山手線の駅名"
 remain = ["とうきょう", "かんだ","あきはばら","おかちまち","うえの","うぐいすだに","にっぽり","にしにっぽり","たばた","こまごめ","すがも","おおつか","いけぶくろ","めじろ","たかだのばば","しんおおくぼ","しんじゅく","よよぎ","はらじゅく","しぶや","えびす","めぐろ","ごたんだ","おおさき","しながわ","たかなわげーとうぇい","たまち","はままつちょう","しんばし","ゆうらくちょう"]
@@ -15,7 +22,7 @@ while len(remain) > 0:
 		print("タイムオーバーです！")
 		break
 	if station in remain:
-		os.system('cls')
+		clearConsole()
 		print("正解です！")
 		remain.remove(station)
 		consume.append(station)
@@ -29,3 +36,4 @@ if len(remain) == 0:
 	print("大正解です！")
 else:
 	print("正解は、",remain, "です。")
+
