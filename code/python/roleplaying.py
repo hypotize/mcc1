@@ -18,10 +18,10 @@ def str_items():
 	return s
 
 def clearConsole():
-        if platform == "win32":
-                os.system('cls')
-        else:
-                os.system('clear')
+	if platform == "win32":
+		os.system('cls')
+	else:
+		os.system('clear')
 
 class Player:
 	def __init__(self, name, hp):
