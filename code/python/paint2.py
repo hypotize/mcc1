@@ -13,13 +13,13 @@ from PIL import Image
 # ・　描画時に右クリックすると、クリックされた位置の色の領域を指定色で塗りつぶす(fill機能)
 # ・　oキーでセーブした画像を読み込む機能(open機能）
 # ・ uキーで各処理ごとにundoする機能(undo機能、但しredo機能はなし）
-# ・ iキーで画像全体とundo等を初期化する機能(initialize機能）
+# ・ iキーを押すといつでも初期状態に戻る機能(initialize機能）
 # ・　pキーでcut/copy and pasteモードに移行（クロスアイコンに変更）もう一度押すと
 #	・　マウスボタンを押した状態から放すまでで領域を選択
-#	・ 領域選択状態でxキーを押すと選択領域をカットして、クリップボードに格納（矢印アイコンに変更）
-#	・ 領域選択状態でcキー押すと選択領域をカットせず、クリップボードに格納（矢印アイコンに変更）
-#	・ クリップボード格納状態でvキーを押すとマウスの位置にクリップボードの内容をコピーする
-#	・　再度マウスボタンを押すとクリップボードの内容が削除され、領域選択モード（クロスアイコン）に戻る
+#	・ 領域選択状態でxキーを押すと選択領域をカットして、クリップボードに格納（矢印アイコンに変更し領域も表示）
+#	・ 領域選択状態でcキー押すと選択領域をカットせず、クリップボードに格納（矢印アイコンに変更し領域も表示）
+#	・ クリップボード格納状態でマウスを左クリックすると表示領域ににクリップボードの内容をコピーする
+#	・　マウスボタンを右クリックするとクリップボードの内容が削除され、領域選択モード（クロスアイコン）に戻る
 #	・　pキーをもう一度押すといつでも通常モードに戻る（クリップボードも削除）
 
 # いろをいくつか定義
@@ -124,13 +124,30 @@ def fill(col, row, old_color, new_color):
 
 # 箱を全部書いていく
 def draw():
+	global cp_pos
 	for i in range(matrix_size):
 		for j in range(matrix_size):
 			val = mtrx[j][i]
 			pygame.draw.rect(screen,colors[val],[i * block_size, j * block_size, block_size,block_size], 0)
+	if cp_mode == 4:
+		col = round(cp_pos[0] / block_size)
+		row = round(cp_pos[1] / block_size)
+		width = cp_pos[4]
+		height = cp_pos[5]
+		for r in range(height):
+			for c in range(width):
+				i = c + col
+				j = r + row
+				if j < matrix_size and i < matrix_size:
+					val = cp_buf[r][c]
+					if val != 4:
+						pygame.draw.rect(screen, cp_colors[val], [i * block_size, j * block_size, block_size, block_size], 0)
+					
+	if cp_mode in [2, 3, 4]:
+		pygame.draw.rect(screen, (192, 192, 192), [cp_pos[0], cp_pos[1], cp_pos[2], cp_pos[3]], width=1)		
 
 pygame.init()
-screen = pygame.display.set_mode([block_size * matrix_size, block_size * matrix_size])
+screen = pygame.display.set_mode([block_size * matrix_size, block_size * matrix_size], pygame.SRCALPHA)
 pygame.display.set_caption("Miura Paint ")
  
 done = False
@@ -143,13 +160,36 @@ cp_mode = 0			# cut/copy and paste mode
 cp_pos = None		# cut/copy 選択位置／矩形領域
 cp_buf = None		# cut/copy 矩形領域の元画像を格納するクリップボード
 
-def draw_cp_area(pos):	# cut/copyの選択領域を矩形の線で表示し、左上の位置を返す
-	x = min(pos[0], cp_pos[0])
-	y = min(pos[1], cp_pos[1])
-	w = abs(pos[0] - cp_pos[0])
-	h = abs(pos[1] - cp_pos[1])
-	pygame.draw.rect(screen, (192, 192, 192), [x, y, w, h], width=1)
-	return (x, y)
+cp_colors = []
+for r, g, b in colors:
+	r = 128 if r == 0 else 255
+	g = 128 if g == 0 else 255
+	b = 128 if b == 0 else 255
+	cp_colors.append((r, g, b, 0))
+	
+
+def get_cp_area(pos):	# cut/copyの選択領域を矩形の線で表示し、左上の位置を返す
+	minx = min(pos[0], cp_pos[0])
+	miny = min(pos[1], cp_pos[1])
+	maxx = max(pos[0], cp_pos[0])
+	maxy = max(pos[1], cp_pos[1])
+	return (minx, miny, maxx-minx, maxy-miny)
+	
+def clipboard(cut):
+	global cp_buf, cp_pos, mtrx, undo_buf
+	col = round(cp_pos[0] / block_size)
+	row = round(cp_pos[1] / block_size)
+	width = round((cp_pos[0] + cp_pos[2]) / block_size) - col + 1
+	height = round((cp_pos[1] + cp_pos[3]) / block_size) - row + 1
+	cp_pos = (cp_pos[0], cp_pos[1], cp_pos[2], cp_pos[3], width, height)
+	cp_buf = [[mtrx[r][c] for c in range(col, col+width)] for r in range(row, row+height)]
+	if cut:
+		buf = []
+		for r in range(row, row+height):
+			for c in range(col, col+width):
+				buf.append((c, r, mtrx[r][c]))
+				mtrx[r][c] = 4
+		undo_buf.append(buf)	# cutしても戻せるようにundoバッファに格納
 
 # -------- Main Program Loop -----------
 while not done:
@@ -226,45 +266,45 @@ while not done:
 					pygame.mouse.set_cursor(cursor)
 			# cut/copy and paste モードのとき　x でcutしてクリップボードにコピー
 			if cp_mode == 3 and event.key == K_x:
-				cp_buf = [[mtrx[r][c] for c in range(col, col+width)] for r in range(row, row+height)]
+				clipboard(True)
 				cp_mode = 4
-				buf = []
-				for r in range(cp_pos[0], cp_pos[0]+cp_pos[1]):
-					for c in range(cp_pos[2], cp_pos[2]+cp_pos[3]):
-						buf.append((c, r, mtrx[r][c]))
-						mtrx[r][c] = 4
-				undo_buf.append(buf)	# cutしても戻せるようにundoバッファに格納
 				# クリップボードに格納したらpaste用の矢印アイコンに変更
+				pygame.mouse.set_pos([cp_pos[0], cp_pos[1]])
 				cursor = pygame.cursors.Cursor(pygame.SYSTEM_CURSOR_ARROW)
 				pygame.mouse.set_cursor(cursor)
 			# cut/copy and paste モードのとき　c そのままでクリップボードにコピー
 			if cp_mode == 3 and event.key == K_c:
-				cp_buf = [[mtrx[r][c] for c in range(col, col+width)] for r in range(row, row+height)]
+				clipboard(False)
 				cp_mode = 4
 				# クリップボードに格納したらpaste用の矢印アイコンに変更
+				pygame.mouse.set_pos([cp_pos[0], cp_pos[1]])
 				cursor = pygame.cursors.Cursor(pygame.SYSTEM_CURSOR_ARROW)
 				pygame.mouse.set_cursor(cursor)
-			# cut/copy and paste モードでクリップボードが空でなければ　v でマウスの位置にクリップボードを貼り付け
-			if cp_mode == 4 and event.key == K_v:
-				buf = []
-				pos = pygame.mouse.get_pos()
-				col = math.floor(pos[0] / block_size)
-				row = math.floor(pos[1] / block_size)
-				for r in range(cp_pos[1]):
-					for c in range(cp_pos[3]):
-						if r+row < matrix_size and c+col < matrix_size:
-							buf.append((c+col, r+row, mtrx[r+row][c+col]))
-							mtrx[r+row][c+col] = cp_buf[r][c]
-				undo_buf.append(buf)
+				
 		#クリックで描く
 		if event.type == pygame.MOUSEBUTTONDOWN:
-			if cp_mode != 0:	# cut/copy and pasteモードの時はマウスの位置を保存し、クリップボードはクリア
-				cp_pos = pygame.mouse.get_pos()
-				cp_buf = None
-				cp_mode = 2
-				# カーソルをcut/copy 領域設定用のクロスマークに変更
-				cursor = pygame.cursors.Cursor(pygame.SYSTEM_CURSOR_CROSSHAIR)
-				pygame.mouse.set_cursor(cursor)
+			if cp_mode != 0:
+				if cp_mode == 4 and pygame.mouse.get_pressed()[0]:
+					buf = []
+					pos = pygame.mouse.get_pos()
+					col = round(pos[0] / block_size)
+					row = round(pos[1] / block_size)
+					width = cp_pos[4]
+					height = cp_pos[5]
+					for r in range(height):
+						for c in range(width):
+							if r+row < matrix_size and c+col < matrix_size:
+								buf.append((c+col, r+row, mtrx[r+row][c+col]))
+								mtrx[r+row][c+col] = cp_buf[r][c]
+					undo_buf.append(buf)
+				elif cp_mode != 2 or pygame.mouse.get_pressed()[2]:	# cut/copy and pasteモードの時はマウスの位置を保存し、クリップボードはクリア
+					x, y = pygame.mouse.get_pos()
+					cp_pos = (x, y, 0, 0)
+					cp_buf = None
+					cp_mode = 2
+					# カーソルをcut/copy 領域設定用のクロスマークに変更
+					cursor = pygame.cursors.Cursor(pygame.SYSTEM_CURSOR_CROSSHAIR)
+					pygame.mouse.set_cursor(cursor)
 			elif pygame.mouse.get_pressed()[0]:  # 左クリックなら単純描画
 				pos = pygame.mouse.get_pos()
 				col = math.floor(pos[0] / block_size)
@@ -279,28 +319,30 @@ while not done:
 				undo_buf.append(fill(col, row, mtrx[row][col], color))		
 
 		#マウスののボタンを押した状態でマウスを動かして、描く
-		if cp_mode == 0 and event.type == pygame.MOUSEMOTION:
+		if event.type == pygame.MOUSEMOTION:
 			if pygame.mouse.get_pressed()[0]:
-				pos = pygame.mouse.get_pos()
-				col = math.floor(pos[0] / block_size)
-				row = math.floor(pos[1] / block_size)
-				if mtrx[row][col] != color:	# 同じところに二度書きするとundoの動作が不自然になるので、禁止する
-					undo_buf.append([(col, row, mtrx[row][col])])
-					mtrx[row][col] = color
+				if cp_mode == 0:
+					pos = pygame.mouse.get_pos()
+					col = math.floor(pos[0] / block_size)
+					row = math.floor(pos[1] / block_size)
+					if mtrx[row][col] != color:	# 同じところに二度書きするとundoの動作が不自然になるので、禁止する
+						undo_buf.append([(col, row, mtrx[row][col])])
+						mtrx[row][col] = color
+				elif cp_mode == 2:
+					pos = pygame.mouse.get_pos()
+					cp_pos = get_cp_area(pos)
+		
+		if cp_mode == 4:
+			pos = pygame.mouse.get_pos()
+			cp_pos = (pos[0], pos[1], cp_pos[2], cp_pos[3], cp_pos[4], cp_pos[5])
 		
 		#cut/copy and pasteモードでマウスボタンが解除されたら、cut/copy領域を線描画し、領域を記録する
 		if cp_mode == 2 and event.type == pygame.MOUSEBUTTONUP:
 			pos = pygame.mouse.get_pos()
-			x, y = draw_cp_area(pos)
-			col = math.ceil(x / block_size)
-			row = math.ceil(y / block_size)
-			width = math.floor(pos[0] / block_size) - col + 1
-			height = math.floor(pos[1] / block_size) - row + 1
-			cp_pos = (row, height, col, width)
+			cp_pos = get_cp_area(pos)
 			cp_mode = 3
 
-	if cp_mode != 3:	# cut/copy領域が線描がされている場合は描画更新しない
-		draw()
+	draw()
 	pygame.display.flip()
 	clock.tick(20) 
 pygame.quit()
