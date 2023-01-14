@@ -48,15 +48,15 @@ class Player:
 		if self.is_human:
 			while True:
 				s = str_items()
-				n = int(input(s + "のどれを選びますか -> "))
+				n = int(input(s + "のどれを選びますか？ -> "))
 				clearConsole()
 				if n >= 1 and n <= len(items):
 					break
-				print("1～{}のいずれかを入力してください".format(len(items)))
+				print("1～{}のいずれかを入力してください。".format(len(items)))
 		else:
 			n = random.randint(1, len(items))
 		item = items[n-1]
-		print("{}は{}を使った".format(self.name, item.name))
+		print("{}は{}を使った。".format(self.name, item.name))
 		time.sleep(1)
 		if len(item.effect) == 1:
 			return item.effect[0]
@@ -67,34 +67,39 @@ players = []
 default_hp = 100
 
 while True:
-	n = int(input("人同士で対戦しますか(1)、コンピュータと対戦しますか(2) -> "))
-	if n == 1 or n == 2:
-		break
-	print("1か2のいずれかを入力してください")
-
-name = input("プレイヤーの名前を入れて下さい -> ")
-players.append(Player(name, default_hp))
-if n == 1:
-	name = input("プレイヤーの名前を入れて下さい -> ")
-	players.append(Player(name, default_hp))
-else:
-	players.append(Player(None, default_hp))
-
-turn = random.randint(0, 1)
-
-while True:
-	players[0].show()
-	players[1].show()
-	print("{}さんの番です。".format(players[turn].name))
-	n = players[turn].battle()
-	next = 1 if turn == 0 else 0
+	n = int(input("何人で対戦しますか？（1人の時はコンピュータと対戦します） -> "))
 	if n > 0:
-		if players[next].damage(n):
-			break
-	elif n < 0:
-		players[turn].heal(-n)
+		break
+	print("1以上の値を入れて下さい。")
+
+for i in range(n):
+	name = input("プレイヤーの名前を入れて下さい。 -> ")
+	players.append(Player(name, default_hp))
+if n == 1:
+	players.append(Player(None, default_hp))
+	n = 2
+
+turns = list(range(n))
+random.shuffle(turns)
+turn = 0
+
+while len(turns) > 1:
+	for i in range(n):
+		if i in turns:
+			players[i].show()
+	print("{}さんの番です。 ".format(players[turns[turn]].name), end="")
+	j = turns[turn]
+	b = players[j].battle()
+	if b > 0:
+		for i in range(n):
+			if i != j and i in turns:
+				if players[i].damage(b):
+					print("{}さんは死にました。".format(players[i].name))
+					turns.remove(i)
+	elif b < 0:
+		players[j].heal(-b)
 	else:
-		print("何も起こらなかった")
+		print("何も起こらなかった。")
 		time.sleep(1)
-	turn = next
-print("{}さんの負けです".format(players[next].name))
+	turn = (turn + 1) % len(turns)
+print("{}さんの勝ちです。".format(players[turns[0]].name))
