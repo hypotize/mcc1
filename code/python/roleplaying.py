@@ -48,11 +48,15 @@ class Player:
 		if self.is_human:
 			while True:
 				s = str_items()
-				n = int(input(s + "のどれを選びますか？ -> "))
-				clearConsole()
-				if n >= 1 and n <= len(items):
-					break
-				print("1～{}のいずれかを入力してください。".format(len(items)))
+				try:
+					n = int(input(s + "のどれを選びますか？ -> "))
+				except:
+					print("数字を入れて下さい。")
+				else:
+					if n >= 1 and n <= len(items):
+						clearConsole()
+						break
+					print("1～{}のいずれかを入力してください。".format(len(items)))
 		else:
 			n = random.randint(1, len(items))
 		item = items[n-1]
@@ -67,10 +71,14 @@ players = []
 default_hp = 100
 
 while True:
-	n = int(input("何人で対戦しますか？（1人の時はコンピュータと対戦します） -> "))
-	if n > 0:
-		break
-	print("1以上の値を入れて下さい。")
+	try:
+		n = int(input("何人で対戦しますか？（1人の時はコンピュータと対戦します） -> "))
+	except:
+		print("数字を入れて下さい。")
+	else:
+		if n > 0:
+			break
+		print("1以上の値を入れて下さい。")
 
 for i in range(n):
 	name = input("プレイヤーの名前を入れて下さい。 -> ")
@@ -101,5 +109,5 @@ while len(turns) > 1:
 	else:
 		print("何も起こらなかった。")
 		time.sleep(1)
-	turn = (turn + 1) % len(turns)
+	turn = (turns.index(j)+1) % len(turns)
 print("{}さんの勝ちです。".format(players[turns[0]].name))
