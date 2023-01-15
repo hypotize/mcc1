@@ -1,0 +1,32 @@
+body {
+  background-color: #99AABB;
+  width: 800px;
+  margin: 30px auto;
+  font-family: 'Noto Serif JP', sans-serif;
+}
+
+img {
+    float:  right;
+    width:  350px;
+    height: 350px;
+    padding: 2px;
+    border: 1px solid #222288;
+    margin: 10px;
+}
+
+h1 {
+    color: #222288;
+    text-align: center;
+}
+
+h2 {
+    color: #222266;
+}
+
+p {
+    color: #333333;
+}
+    
+
+
+
