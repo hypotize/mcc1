@@ -127,7 +127,7 @@ class Console:
 			surface.blit(text, self.pos)
 
 def main(playername):
-	sysfont = pygame.font.SysFont("Meiryo", 12)
+	sysfont = pygame.font.Font("ipaexg.ttf", 12)
 	players = [Player(playername, 100, ["png/stand1_front05_man.png", "png/pose_genki03_man.png", "png/shinpai_man.png",\
 		"png/yaruki_moeru_man.png", "png/pose_shock_man.png", "png/sick_kaoiro_man.png", "png/seikou_banzai_man.png"], 150, True), \
 		Player("コンピュータ", 100, ["png/stand1_front06_woman.png", "png/pose_genki04_woman.png", "png/shinpai_woman.png",\
