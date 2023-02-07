@@ -127,68 +127,73 @@ class Shot:
 	def draw(self):
 		pygame.draw.circle(surface, (255,255,0) if self.is_self else (255,0,255), self.rect.center, self.size)
 
-def main():
-	ip = input("相手のPCのIPアドレスを入力してください。-> ")
-	n = int(input("ポートID: 相手が0なら1を、相手が1なら0を入力して下さい。-> "))
-	port1 , port2 = (8080, 8081) if n == 0 else (8081, 8080)
+def main(ip, n):
+	port1 , port2 = (8080, 8081) if n == "0" else (8081, 8080)
 	q = queue.Queue()
 	server = Server(q, port2)
 	client = Client(q, ip, port1)
 	client.com_init()
-	
-	myship = Ship(True)
-	myship.setpos((50, 250))
-	yourship = Ship(False)
-	yourship.setpos((650, 250))
-	move_y = 0
-	message = None
-	sysfont = pygame.font.SysFont("Meiryo", 30)
 	while True:
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				client.c2s("quit#")
-				pygame.quit()
-				sys.exit()
-			elif event.type == KEYDOWN:
-				if event.key == K_UP:
-					move_y = -10
-				elif event.key == K_DOWN:
-					move_y = 10
-				elif event.key == K_SPACE:
-					dy = myship.shot()
-					if dy is not None:
-						client.c2s("shot#{}".format(dy), 5)
-			elif event.type == KEYUP:
-				move_y = 0
-		if move_y != 0:
-			myship.move(move_y)
-			client.c2s("move#{}".format(move_y), 5)
-		if client.q.empty() == False:
-			cmd = client.q.get().split("#")
-			if cmd[0] == "quit":
-				pygame.quit()
-				sys.exit()
-			elif cmd[0] == "move":
-				yourship.move(int(cmd[1]))
-			elif cmd[0] == "shot":
-				yourship.shot(int(cmd[1]))
-			elif cmd[0] == "lose":
-				yourship.explosion()
-				message = "あなたの勝ち"
-		for shot in yourship.shots:
-			if myship.rect.colliderect(shot.rect):
-				myship.explosion()
-				message = "あなたの負け"
-				client.c2s("lose#")
+		myship = Ship(True)
+		myship.setpos((50, 250))
+		yourship = Ship(False)
+		yourship.setpos((650, 250))
+		move_y = 0
+		message = None
+		sysfont = pygame.font.Font("ipaexg.ttf", 30)
+		while True:
+			for event in pygame.event.get():
+				if event.type == QUIT:
+					client.c2s("quit#")
+					pygame.quit()
+					sys.exit()
+				elif event.type == KEYDOWN:
+					if event.key == K_UP:
+						move_y = -10
+					elif event.key == K_DOWN:
+						move_y = 10
+					elif event.key == K_SPACE:
+						dy = myship.shot()
+						if dy is not None:
+							client.c2s("shot#{}".format(dy), 5)
+				elif event.type == KEYUP:
+					move_y = 0
+			if move_y != 0:
+				myship.move(move_y)
+				client.c2s("move#{}".format(move_y), 5)
+			if client.q.empty() == False:
+				cmd = client.q.get().split("#")
+				if cmd[0] == "quit":
+					pygame.quit()
+					sys.exit()
+				elif cmd[0] == "move":
+					yourship.move(int(cmd[1]))
+				elif cmd[0] == "shot":
+					yourship.shot(int(cmd[1]))
+				elif cmd[0] == "lose":
+					yourship.explosion()
+					message = "あなたの勝ち"
+			for shot in yourship.shots:
+				if myship.rect.colliderect(shot.rect):
+					myship.explosion()
+					message = "あなたの負け"
+					client.c2s("lose#")
+					break
+			surface.fill((255,255,255))
+			myship.draw()
+			yourship.draw()
+			if message is not None:
+				text = sysfont.render(message, True, (255,0,0))
+				surface.blit(text, (300, 250))
+			pygame.display.update()
+			fpsclock.tick(15)
+			if not myship.alive or not yourship.alive:
+				fpsclock.tick(0.2)
 				break
-		surface.fill((255,255,255))
-		myship.draw()
-		yourship.draw()
-		if message is not None:
-			text = sysfont.render(message, True, (255,0,0))
-			surface.blit(text, (300, 250))
-		pygame.display.update()
-		fpsclock.tick(15)
 
 if __name__ == '__main__':
-	main()
+	if len(sys.argv) != 3:
+		print("usage: python3 pygame_shot.py ipaddress port(0 or 1)")
+		sys.exit();
+		
+	main(sys.argv[1], sys.argv[2])
