@@ -7,10 +7,12 @@ import time
 import queue
 import threading
 import math
-from win32gui import SetForegroundWindow
+#from win32gui import SetForegroundWindow
 
 surface = None
 fpsclock = None
+
+MAX_SHOT = float("inf")
 
 class Client:
 	def __init__(self, q, url):
@@ -131,7 +133,7 @@ class Ship:
 	def shot(self, angle=None):
 		if angle is None:
 			angle = self.angle+20
-		if self.alive and len(self.shots) < 7:
+		if self.alive and len(self.shots) < MAX_SHOT:
 			shot = Shot(self.is_self, angle)
 			shot.setpos((self.rect.center[0] + (50 if self.is_self else -50), self.rect.center[1]+20))
 			self.shots.append(shot)
@@ -182,7 +184,7 @@ def main(client):
 	pygame.init()
 	surface = pygame.display.set_mode((800,650))
 	pygame.display.set_caption("Shot2")
-	SetForegroundWindow(pygame.display.get_wm_info()['window'])
+#	SetForegroundWindow(pygame.display.get_wm_info()['window'])
 	fpsclock = pygame.time.Clock()
 	sysfont = pygame.font.Font("ipaexg.ttf", 30)
 	numfont = pygame.font.Font("ipaexg.ttf", 12)
