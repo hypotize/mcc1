@@ -9,7 +9,7 @@ import threading
 import math
 import random
 import copy
-from win32gui import SetForegroundWindow
+#from win32gui import SetForegroundWindow
 
 surface = None
 fpsclock = None
@@ -304,7 +304,7 @@ def main(client):
 	pygame.init()
 	surface = pygame.display.set_mode((400,300))
 	pygame.display.set_caption("RPG4")
-	SetForegroundWindow(pygame.display.get_wm_info()['window'])
+#	SetForegroundWindow(pygame.display.get_wm_info()['window'])
 	fpsclock = pygame.time.Clock()
 	sysfont = pygame.font.Font("ipaexg.ttf", 12)
 	

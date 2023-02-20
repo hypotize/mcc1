@@ -15,7 +15,7 @@ import threading
 import math
 import random
 import copy
-from win32gui import SetForegroundWindow
+#from win32gui import SetForegroundWindow
 
 surface = None
 fpsclock = None
