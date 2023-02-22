@@ -1,0 +1,249 @@
+<html>
+<head>
+<title>ゲーム入門</title>
+</head>
+<body>
+	<h1>ゲーム入門</h1>
+	<h2>ステップ０</h2>
+	<p>最初にマイケルさんのお絵描きツールpaint.pyを改造したpaintchar.pyを使って
+	プレイヤーのキャラクター（動物）とえさのキャラクター（フルーツ）を16x16の大きさで作成します。
+	作成したらsキーでファイルに書き出します。ファイル名は分かりやすい名前に変更してください。</p>
+	<p>なお、背景の色は５番の灰色を使い、この色は背景以外には使わないでください。</p>
+	<p>サンプルとして、cat.png（猫）とapple.png（リンゴ）を作ってあります。</p>
+	<h2>ステップ１</h2>
+	<p>ステップ０で作成したプレイヤーの画像を表示します。</p>
+	<p>プログラムの内容は下記の通りです。game.pyという名前で作成します。１から自分で打ち込んでもいいですし、step1.pyをそのままコピーして名前を変えても構いません。</p>
+	<code>
+	# 使用するライブラリを呼び出します<br>
+	import sys<br>
+	import pygame<br>
+	from pygame.locals import *<br>
+	<br>
+	# pygameの初期設定を行います<br>
+	pygame.init()<br>
+	SURFACE = pygame.display.set_mode((800, 600))	#Windowサイズは800x600ピクセル<br>
+	FPSCLOCK = pygame.time.Clock()<br>
+	TICK = 15	#　描画間隔は１秒間に15コマ<br>
+	<br>
+	# メインルーチン<br>
+	def main():
+	<ul>
+		# プレイヤー（猫）のイメージファイルを読み込み、５倍(80x80)に拡大する<br>
+		image = pygame.image.load("cat.png")<br>
+		player_image = pygame.transform.scale(image, (80, 80))<br>
+		#描画処理<br>
+		while True:	# メインループ<br>
+		<ul>
+			for event in pygame.event.get():	#　各種イベントを取得<br>
+			<ul>
+				if event.type == QUIT:	# 右上の×ボタンをクリックしたら終了<br>
+				<ul>
+					pygame.quit()<br>
+					sys.exit()<br>
+				</ul>
+			</ul>
+			SURFACE.fill((0, 0, 0))	#　画面全体を黒で塗りつぶす<br>
+			SURFACE.blit(player_image, (375, 225))	# プレイヤー（猫）を描画<br>
+			pygame.display.update()	# 画面を更新<br>
+			FPSCLOCK.tick(TICK)		# 描画間隔を調整<br>
+		</ul>
+	</ul>
+	if __name__ == '__main__':	# ここからプログラムスタート
+	<ul>
+		main()	#メインルーチンを呼び出す
+	</ul>
+	</code>
+	<p>"cat.png"の部分をステップ０で自分が作成した動物に変えてみてください。</p>
+	<h2>ステップ２</h2>
+	<p>プレイヤー（猫）の背景（灰色の部分）を透過します。<p>
+	<p>プレイヤー（猫）の画像の背景色は灰色なので透過色に灰色(RGB(128,128,128))を指定します。</p>
+	<code>
+	<ul>
+		player_image = pygame.transform.scale(image, (80, 80))<br>
+		<font color=#ff0000>player_image.set_colorkey((128,128,128))	# 灰色(RGB(128,128,128))を透過色にする</font><em>←この行を追加</em><br>
+		# 描画処理<br>
+	</ul>
+	</code>
+	<h2>ステップ３</h2>
+	<p>プレイヤー（猫）を動かします。</p>
+	<p>キーボード操作で上下左右に動かします。</p>
+	<code>
+	SURFACE = pygame.display.set_mode((800, 600))	#Windowサイズは800x600ピクセル<br>
+	<font color=#ff0000>pygame.key.set_repeat(15, 15)	# キーを押し続けても一定間隔でイベントを発生させる</font><em>←この行を追加</em><br>
+	FPSCLOCK = pygame.time.Clock()<br>
+	...<br>
+	<ul>
+		player_image.set_colorkey((128,128,128))	# 灰色(RGB(128,128,128))を透過色にする<br>
+		<font color=#ff0000># プレイヤー（猫）の位置を変数に設定する<br>
+		player_x = 375<br>
+		player_y = 225</font><em>←これらの行を追加</em><br>
+		# 描画処理<br>
+		...<br>
+		<ul>
+			<ul>
+				if event.type == QUIT:	# 右上の×ボタンをクリックしたら終了<br>
+				<ul>
+					pygame.quit()<br>
+					sys.exit()<br>
+				</ul>
+				<font color=#ff0000>
+				if event.type == KEYDOWN:	# キーが押されたら
+				<ul>
+					if event.key == K_LEFT:	# ←キーなら
+					<ul>
+						player_x = max(player_x - 10, 0)	# 0以下にはならない
+					</ul>
+					if event.key == K_RIGHT:	# →キーなら
+					<ul>
+						player_x = min(player_x + 10, 720)	# 720以上にはならない
+					</ul>
+					if event.key == K_UP:	# ↑キーなら
+					<ul>
+						player_y = max(player_y - 10, 0)	# 0以下にはならない
+					</ul>
+					if event.key == K_DOWN:	# ↓キーなら
+					<ul>
+						player_y = min(player_y + 10, 520)	# 520以上にはならない
+					</ul>
+				</ul>
+				</font><em>←これらの行を追加</em>
+			</ul>
+			SURFACE.blit(player_image, <font color=#ff0000>(player_x, player_y)</font>)	# プレイヤー（猫）を描画<em>←この行を変更</em><br>
+		</ul>
+	</ul>
+	</code>
+	<h2>ステップ４</h2>
+	<p>えさのフルーツ（リンゴ）を出現させてみます。</p>
+	<p>一定間隔でランダムな位置（高さ）に出現させ、一定の速度で移動させます。</p>
+	<code>
+	<font color=#ff0000>from random import randint	# ランダムな値を発生させる</font><em>←先頭のライブラリにこの行を追加</em><br>
+	...<br>
+	<ul>
+		<font color=#ff0000>
+		# えさのフルーツ（リンゴ）のイメージファイルを読み込み、５倍(80x80)に拡大する<br>
+		image = pygame.image.load("apple.png")<br>
+		fruit_image = pygame.transform.scale(image, (80, 80))<br>
+		fruit_image.set_colorkey((128,128,128))	# 灰色(RGB(128,128,128))を透過色にする<br>
+		# えさのフルーツ（リンゴ）を一定間隔で4個、ランダムな高さに出現させる。(x, y, 有効)<br>
+		fruits = [[i * 300, randint(0, 520), True] for i in range(4)]<br>
+		</font><em>←main()の後のプレイヤー情報設定後にこれらの行を追加</em><br>
+	...<br>
+		<ul>
+			SURFACE.fill(<font color=#ff0000>(0, 191, 255)</font>)	#　画面全体を淡い青で塗りつぶす<em>←背景色を淡い青に変更</em><br>
+			<font color=#ff0000>
+			for fruit in fruits:
+			<ul>
+				if fruit[2] and fruit[0] &lt; 800:	# フルーツが有効で描画範囲内なら指定の位置に描画する
+				<ul>
+					SURFACE.blit(fruit_image, (fruit[0], fruit[1]))
+				</ul>
+			</ul>
+			</font><em>←これらの行を追加</em><br>
+			...<br>
+			FPSCLOCK.tick(TICK)		# 描画間隔を調整<br>
+			<font color=#ff0000>
+			for fruit in fruits:
+			<ul>
+				fruit[0] -= 20	# 各フルーツを左に20移動<br>
+				if fruit[0] &lt; -40:	# フルーツが左端を超えそうなら右端奥に移動し、高さはランダムに再設定
+				<ul>	
+					fruit[0] += 1200<br>
+					fruit[1] = randint(0, 520)<br>
+					fruit[2] = True	# 有効にする
+				</ul>
+			</ul>
+			</font><em>←これらの行を追加</em><br>
+		</ul>
+	</ul>
+	</code>
+	<h2>ステップ５</h2>
+	<p>プレイヤー（猫）がえさのフルーツ（リンゴ）を食べます。</p>
+	<p>プレイヤー（猫）がえさのフルーツ（リンゴ）に一定距離近づいたら、えさのフルーツを表示しないようにします。</p>
+	<code>
+	<ul>
+		<ul>
+			for fruit in fruits:<br>
+			<ul>
+				<font color=#ff0000>
+				# 命中判定：　フルーツが有効で、フルーツの位置（左上）がプレイヤーの位置(左上）の上下左右±60以内なら<br>
+				if fruit[2] and abs(fruit[0] - player_x) &lt; 60 and abs(fruit[1] - player_y) &lt; 60:
+				<ul>
+					fruit[2] = False	# フルーツを無効（食べた）にする
+				</ul>
+				</font><em>←これらの行を追加</em><br>
+				fruit[0] -= 20	# 各フルーツを左に20移動
+			</ul>
+		</ul>
+	</ul>
+	</code>
+	<h2>ステップ６</h2>
+	<p>得点を表示します。</p>
+	<p>得点を表示し、プレイヤー（猫）がえさのフルーツ（リンゴ）を食べたら得点を100点追加します。</p>
+	<code>
+	main():<br>
+	<ul>
+		...<br>
+		fruits = [[i * 300, randint(0, 520), True] for i in range(4)]<br>
+		<font color=#ff0000>
+		# 点数を表示するフォント（文字種）と大きさを設定する<br>
+		scorefont = pygame.font.Font("ipaexg.ttf", 24)<br>
+		# 点数<br>
+		score = 0<br>
+		</font><em>←これらの行を追加</em><br>
+		# 描画処理<br>
+		while True:	# メインループ
+		<ul>
+			...<br>
+			SURFACE.fill((0, 191, 255))	#　画面全体を淡い青で塗りつぶす<br>
+			<font color=#ff0000>
+			score_image = scorefont.render("Score {:>4}".format(score), True, (255,255,255))<br>
+			SURFACE.blit(score_image, (20,20))<br>
+			</font><em>←これらの行を追加</em><br>
+			for fruit in fruits:<br>
+			...<br>
+			for fruit in fruits:
+			<ul>
+				# フルーツが有効で、フルーツの位置（左上）がプレイヤーの位置(左上）の上下左右±60以内なら<br>
+				if fruit[2] and abs(fruit[0] - player_x) &lt; 60 and abs(fruit[1] - player_y) &lt; 60:<br>
+				<ul>
+					fruit[2] = False	# フルーツを無効（食べた）にする<br>	
+					<font color=#ff0000>score += 100　#100点追加</font><em>←この行を追加</em><br>
+				</ul>
+				fruit[0] -= 20	# 各フルーツを左に20移動<br>
+			</ul>
+		</ul>
+	</ul>
+	</code>
+	<h2>課題１</h2>
+	<p>えさのフルーツの速度を最初はゆっくり、だんだん早くするようにしてみてください。<p>
+	<h3>ヒント</h3>
+	<p>「# 各フルーツを左に20移動」という部分の-20という値を変更すると速度が変わります</p>
+	<p>時間によって速度を変えたければ、ループのカウンタを作って、カウンタの値によって速度を変化させます</p>
+	<p>得点によって速度を変えたければ、得点の値によって速度を変化させます</p>
+	<h2>課題２</h2>
+	<p>プレイヤー（猫）は常に左向きですが、動く方向によって向きを変えてください。</p>
+	<h3>ヒント</h3>
+	<p>プレイヤーの左右の向きを変えるのは以下の命令です。TrueとFalseを逆にすると上下の向きが変わります。</p>
+	<code>
+	player_image = pygame.transform.flip(player_image, True, False)
+	</code>
+	<p>上下左右のキーを押したとき、現在の向きと異なる場合、向きを変える必要があります。</p>
+	<p>現在の向きを覚えておいて、適切に向きを変えるようにしましょう。まずは、左右だけやってみてください。</p>
+	<h2>課題３</h2>
+	<p>えさの大きさを、ランダムに大きくしたり、小さくしたりして、命中の難易度を変え、大きさによって得点が変わる（大きいほど点数が低く、小さいほど点数が高い）ようにしてください。</p>
+	<h3>ヒント</h3>
+	<p>えさの情報は現在[x位置、y位置、有効か]の３つですが、これに大きさを追加します。</p>
+	<p>大きさは現在(80,80)ですが、これをy位置をランダムにしたように、例えばrandint(40,160)で1/2～2倍の範囲に変更します。</p>
+	<p>変更したら描画のときに変更したsizeを以下の命令を行えば、変更できます。 元のイメージを書き換えるのではなく、描画直前に変更して変更したものを描画するようにしましょう。</p>
+	<code>
+	fruit_image = pygame.image.load("apple.png")<br>
+	...<br>
+	image = pygame.transform.scale(fruit_image, (size, size))<br>
+	SURFACE.blit(image, (fruit[0], fruit[1]))<br>
+	</code>
+	<p>ただし、大きさを変更してもこのままでは命中の難易度が変わらないので、命中判定の部分も変える必要があります。ちょっと難しいけど自分で考えてみてください。<p>
+	<p>得点も大きさに合わせて変更する必要があります。
+</body>
+</html>
+	
+	
