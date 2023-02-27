@@ -52,6 +52,7 @@ def main():
 	Mogura.setImage("hit.png", Mogura.HIT, 100)			# 命中したモグラ画像を設定
 	scorefont = pygame.font.Font("ipaexg.ttf", 24)
 	sysfont = pygame.font.Font("ipaexg.ttf", 48)
+	pygame.mixer.music.load("hummer.mp3")	# 効果音（ピコピコハンマー）
 	while True:	# Game Over後再開したら再び実行
 		play()	
 
@@ -81,6 +82,7 @@ def play():
 					if mogura.collidepoint(pos):	# 外に出ているモグラに命中したら
 						mogura.status = Mogura.HIT	# 命中状態にして
 						mogura.setTimer(TICK)		# 1秒間表示させる
+						pygame.mixer.music.play()	# 効果音を出す
 						score += 1
 			if event.type == pygame.MOUSEMOTION:	# マウスの動きに合わせてハンマーが動く
 				hummer_pos = pygame.mouse.get_pos()
