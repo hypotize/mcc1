@@ -164,7 +164,7 @@ python3 p01.py
 例えば、先ほどのプログラムを実行し、`けん、マイケル、梓`を登録した後、`あなたの名前は？`という問いに対し`ゆうま`と入力すると以下のようなエラーメッセージが出力され、プログラムが終了してしまいます。
 ```
 Traceback (most recent call last):
-  File "test03.py", line 8, in <module>
+  File "p01.py", line 8, in <module>
     print("あなたは現在", age[name], "歳です。")
 KeyError: 'ゆうま'
 ```
