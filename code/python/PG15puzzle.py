@@ -19,12 +19,8 @@ class CustomButton:
 		return self.rect.collidepoint(x, y)
 	def move(self, cb):
 		if self.isMovable:
-			position = self.position
-			rect = self.rect
-			self.rect = cb.rect
-			self.position = cb.position
-			cb.rect = rect
-			cb.position = position
+			self.position, cb.position = cb.position, self.position
+			self.rect, cb.rect = cb.rect, self.rect
 	def show(self, surface):
 		if self.visible:
 			pygame.draw.rect(surface, (192, 192, 192), self.rect)
@@ -47,32 +43,31 @@ class Game:
 		self.myCustomButton[15].visible = False
 		self.setMovable()
 		for i in range(100):
-			r = random.randint(0, len(self.randlist)-1)
-			self.randlist[r].move(self.myCustomButton[15])
+			random.choice(self.randlist).move(self.myCustomButton[15])
 			self.setMovable()
 	def setMovable(self):
 		self.randlist.clear()
-		x15, y15 = self.myCustomButton[15].rect.topleft
+		x15 = self.myCustomButton[15].position % 4
+		y15 = self.myCustomButton[15].position // 4
 		for button in self.myCustomButton:
-			x, y = button.rect.topleft
-			if (y == y15 and abs(x - x15) == 100) or \
-				(x == x15 and abs(y - y15) == 100):
+			x = button.position % 4
+			y = button.position // 4
+			if (y == y15 and abs(x - x15) == 1) or \
+				(x == x15 and abs(y - y15) == 1):
 				button.isMovable = True
 				self.randlist.append(button)
 			else:
 				button.isMovable = False
 	def checkComplete(self):
-		complete = 0
 		for button in self.myCustomButton:
-			if button.name == str(button.position+1):
-				complete += 1
-		if complete == 16:
-			self.myCustomButton[15].setText("OK")
-			self.myCustomButton[15].visible = True
+			if button.name != str(button.position+1):
+				return
+		self.myCustomButton[15].setText("OK")
+		self.myCustomButton[15].visible = True
 	def button_click(self, x, y):
 		for button in self.myCustomButton:
 			if button.collidepoint(x, y):
-				if button.name == "16" and button.visible:
+				if button == self.myCustomButton[15] and button.visible:
 					self.init()
 				else:
 					button.move(self.myCustomButton[15])
