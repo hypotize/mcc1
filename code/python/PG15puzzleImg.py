@@ -115,7 +115,7 @@ def main():
 		sys.exit()
 	pygame.init()
 	image = pygame.image.load(sys.argv[1])
-	game = Game("15 puzzle", image, size, randcnt)
+	game = Game("{} puzzle".format(size*size-1), image, size, randcnt)
 	while True:
 		for event in pygame.event.get():
 			if event.type == QUIT:
