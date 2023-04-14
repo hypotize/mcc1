@@ -2,6 +2,7 @@ import random
 import time
 import os
 import copy
+import platform
 
 input("enterキーを押して下さい")
 
@@ -15,7 +16,10 @@ print(" ".join(list(map(str, numbers))))
 
 time.sleep(3)
 
-os.system('clear')
+if platform.system() == 'Linux':
+	os.system('clear')
+elif platform.system() == 'Windows':
+	os.system('cls')
 
 print("5つの数字をすべて入力してください")
 
