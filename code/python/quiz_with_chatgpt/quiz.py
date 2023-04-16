@@ -2,7 +2,7 @@ import json
 import random
 
 # 問題を読み込む
-with open('quiz_data.json') as f:
+with open('quiz_data.json', encoding="utf-8_sig") as f:
     quiz_data = json.load(f)['questions']
 
 # 問題をランダムにシャッフルする
@@ -32,7 +32,7 @@ for i, question in enumerate(quiz_data):
         num_correct += 1
     else:
         print('不正解...')
-        print(f'正解は {question["choices"][question["answer"]]} でした。')
+        print(f'正解は {question["choices"][question["answer"]-1]} でした。')
 
 # 正解の数を表示する
 print(f'\n正解数: {num_correct}')
