@@ -24,11 +24,11 @@ img = img.convert('RGBA')
 que = [(0,0)]
 
 while len(que) > 0:
-	x, y = que.pop()
+	x, y = que.pop(0)
 	color = img.getpixel((x, y))
 	for dx, dy in ((0, 1), (0, -1), (1, 0), (-1, 0)):
 		nx, ny = x + dx, y + dy
-		if nx >= 0 and nx < img.size[0] and ny >= 0 and ny < img.size[1]:
+		if 0 <= nx < img.size[0] and 0 <= ny < img.size[1]:
 			ncolor = img.getpixel((nx, ny))
 			if ncolor[3] == 255 and diff(color, ncolor) <= thresh:
 				ncolor = (ncolor[0], ncolor[1], ncolor[2], 0)
