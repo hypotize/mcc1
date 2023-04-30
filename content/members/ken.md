@@ -8,7 +8,7 @@ showFullContent = true
 readingTime = false
 +++
 
-![panda](/images/panda.JPG)
+![panda](/images/panda.png)
 
 |重要情報|
 |----|----|
