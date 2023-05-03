@@ -1,4 +1,5 @@
 import random
+import time
 
 class Card(object):
 	cards = None
@@ -25,7 +26,7 @@ class Card(object):
 		return "| " + self.name + " |"
 	@classmethod
 	def set(cls):
-		cls.cards = [cls("Ａ",1), cls("２",2), cls("３",3), cls("４",4), cls("５",5), cls("６",6),	cls("７",7), cls("８",8), cls("９",9), cls("10",10), cls("Ｊ",11), cls("Ｑ",12), cls("Ｋ",13)]
+		cls.cards = [cls("Ａ",14), cls("２",2), cls("３",3), cls("４",4), cls("５",5), cls("６",6),	cls("７",7), cls("８",8), cls("９",9), cls("10",10), cls("Ｊ",11), cls("Ｑ",12), cls("Ｋ",13)]
 	@classmethod
 	def get(cls):
 		if cls.cards is None:
@@ -52,11 +53,13 @@ def main():
 			print(card2)
 			if card2 < card:
 				print("あなたの負け。所持金は {}$です。".format(money))
+				time.sleep(1)
 				break
 			print("あなたの勝ち。 {}$の勝ちです。".format(bet * odds))
 			if int(input("倍率は{}倍。続けますか？ (1=Yes; 0=No!) ".format(odds * 2))) == 0:
 				money += bet * odds
 				print("所持金は {}$です。".format(money))
+				time.sleep(1)
 				break
 			odds *= 2
 			card = card2
