@@ -1,21 +1,124 @@
-GAME_INIT = 0
-GAME_EXEC = 1
-GAME_OVER = 2
-gseq = GAME_INIT
-title = None
-bg = None
-score = 0
-
-keyState = [False] * 3
+class Game:
+    INIT = -1
+    TITLE = 0
+    PLAY = 1
+    OVER = 2
+    titleImg = None
+    bgImg = None
+    KEY_LEFT = 0
+    KEY_RIGHT = 1
+    KEY_SPACE = 2
+    keyState = [False] * 3
+    @classmethod
+    def loadImage(cls, titleFile, bgFile):
+        cls.titleImg = loadImage(titleFile)
+        cls.bgImg = loadImage(bgFile)
+    @classmethod
+    def setKey(cls, keyNo):
+        Game.keyState[keyNo] = True
+    @classmethod
+    def clrKey(cls, keyNo):
+        Game.keyState[keyNo] = False
+    @classmethod
+    def getKey(cls, keyNo):
+        return Game.keyState[keyNo]
+    def __init__(self):
+        self.seq = Game.INIT
+        self.score = -1
+    def isTitle(self):
+        return self.seq == Game.TITLE
+    def isPlay(self):
+        return self.seq == Game.PLAY
+    def done(self):
+        self.seq = Game.OVER
+    def init(self):
+        self.seq = Game.TITLE
+        player.init()
+        BombPlayer.cnt = 6
+        for i in range(len(enemy)):
+            enemy[i] = Enemy(Enemy.UNUSED, i * 20, 100 + i * 26, random(0.5, 2.5))
+        for i in range(len(bombP)):
+            bombP[i] = BombPlayer()
+        for i in range(len(bombE)):
+            bombE[i] = BombEnemy()
+        for i in range(len(Game.keyState)):
+            Game.keyState[i] = False
+        self.score = 0        
+        self.tcnt = 0
+    def title(self):
+        image(Game.titleImg, 0, 0, 600, 450)
+        self.tcnt += 1
+        if self.tcnt > 60 and (self.tcnt % 60) < 40:
+            textSize(30)
+            fill(40, 250, 40)
+            text("Push any key!", 210, 320)
+    def play(self):
+        player.move()
+        image(Game.bgImg, 0, 90, 600, 360)
+        player.display()
+        enemyMove()
+        enemyDisp()
+        bombPlayerMove()
+        bombEnemyMove()
+        self.scoreDisp()
+    def over(self):
+        print("game over")
+        player.display()
+        image(Game.bgImg, 0, 90, 600, 360)
+        enemyDisp()
+        bombEnemyMove()
+        self.scoreDisp()
+        if player.sink < 100:
+            player.sink += 1
+        if player.sink > 60:
+            textSize(70)
+            fill(255, 0, 0)
+            text("GAME OVER", 110, 240)
+            if self.tcnt > 60 and (self.tcnt % 60) < 40:
+                textSize(30)
+                fill(40, 250, 40)
+                text("Push any key!", 210, 320)
+            self.tcnt += 1
+    def addScore(self, i):
+        self.score += i
+    def scoreDisp(self):
+        textSize(24)
+        fill(0, 0, 0)
+        text("score: {}".format(self.score), 10, 25)
+    def checkWaiting(self):
+        if self.seq == Game.TITLE and self.tcnt > 60:
+            self.seq = Game.PLAY
+            self.tcnt = 0
+        if self.seq == Game.OVER and self.tcnt > 60:
+            self.init()
+            self.seq = Game.PLAY
+            self.tcnt = 0
+    
+game = Game()
 
 class Player:
     img = None
+    @classmethod
+    def loadImage(cls, filename):
+        cls.img = loadImage(filename)
     def __init__(self):
         self.w = 120
         self.init()
     def init(self):
         self.x = 240
         self.sink = 0
+    def move(self):
+        if Game.getKey(Game.KEY_LEFT) and self.x > 0:
+            self.x -= 3
+        if Game.getKey(Game.KEY_RIGHT) and self.x < width - self.w:
+            self.x += 3
+        if BombPlayer.wait > 0:
+            BombPlayer.wait -= 1
+        if Game.getKey(Game.KEY_SPACE) and BombPlayer.wait == 0:
+            BombPlayer.wait = 10
+            bombPlayerAdd()
+    def display(self):
+        image(Player.img, self.x, 58 + (self.sink / 2))
         
 player = Player()
 
@@ -26,6 +129,10 @@ class Enemy:
     EXPL2 = 3
     UNUSED = 4
     img = [None] * 4
+    @classmethod
+    def loadImage(cls, files):
+        for i in range(len(files)):
+            cls.img[i] = loadImage(files[i])
     def __init__(self, d, x, y, speed):
         self.d = d
         self.x = x
@@ -63,6 +170,9 @@ class BombPlayer:
     img = None
     cnt = 6
     wait = 0
+    @classmethod
+    def loadImage(cls, file):
+        cls.img = loadImage(file)
     def __init__(self):
         self.x = 0
         self.y = 0
@@ -87,6 +197,9 @@ class BombPlayer:
 
 class BombEnemy:
     img = None
+    @classmethod
+    def loadImage(cls, file):
+        cls.img = loadImage(file)
     def __init__(self):
         self.x = 0
         self.y = 0
@@ -125,95 +238,25 @@ def setup():
     noStroke()
     frameRate(30)
     imgLoad()
-    gameInit()
+    game.init()
     
 def draw():
     background(0, 255, 255)
-    if gseq == GAME_INIT:
-        gameTitle()
-    elif gseq == GAME_EXEC:
-        gamePlay()
+    if game.isTitle():
+        game.title()
+    elif game.isPlay():
+        game.play()
     else:
-        gameOver()
-        
-def gameInit():
-    global gseq, player, enemy, bombP, bombE, keyState, score
-    gseq = GAME_INIT
-    player.init()
-    BombPlayer.cnt = 6
-    for i in range(12):
-        enemy[i] = Enemy(Enemy.UNUSED, i * 20, 100 + i * 26, random(0.5, 2.5))
-    for i in range(6):
-        bombP[i] = BombPlayer()
-    for i in range(20):
-        bombE[i] = BombEnemy()
-    for i in range(3):
-        keyState[i] = False
-    score = 0
-    
-tcnt = 0
-def gameTitle():
-    global tcnt
-    image(title, 0, 0, 600, 450)
-    tcnt += 1
-    if tcnt > 60 and (tcnt % 60) < 40:
-        textSize(30)
-        fill(40, 250, 40)
-        text("Push any key!", 210, 320)
-    
-def gamePlay():
-    playerMove()
-    image(bg, 0, 90, 600, 360)
-    image(Player.img, player.x, 58)
-    enemyMove()
-    enemyDisp()
-    bombPlayerMove()
-    bombEnemyMove()
-    scoreDisp()
-    
-def gameOver():
-    global player, tcnt
-    image(Player.img, player.x, 58 + (player.sink / 2))
-    image(bg, 0, 90, 600, 360)
-    enemyDisp()
-    bombEnemyMove()
-    scoreDisp()
-    if player.sink < 100:
-        player.sink += 1
-    if player.sink > 60:
-        textSize(70)
-        fill(255, 0, 0)
-        text("GAME OVER", 110, 240)
-        if tcnt > 60 and (tcnt % 60) < 40:
-            textSize(30)
-            fill(40, 250, 40)
-            text("Push any key!", 210, 320)
-        tcnt += 1
-    
+        game.over()
+           
 def imgLoad():
-    global bg, title
-    bg = loadImage("sm_bg.png")
-    Player.img = loadImage("sm_player.png")
-    Enemy.img[Enemy.LEFT] = loadImage("sm_enemyL.png")
-    Enemy.img[Enemy.RIGHT] = loadImage("sm_enemyR.png")
-    Enemy.img[Enemy.EXPL1] = loadImage("sm_explosion1.png")
-    Enemy.img[Enemy.EXPL2] = loadImage("sm_explosion2.png")
-    BombPlayer.img = loadImage("sm_bombP.png")
-    BombEnemy.img = loadImage("sm_bombE.png")
-    title = loadImage("sm_title.png")
-    
-def playerMove():
-    global player
-    if keyState[0] and player.x > 0:
-        player.x -= 3
-    if keyState[1] and player.x < width - player.w:
-        player.x += 3
-    if BombPlayer.wait > 0:
-        BombPlayer.wait -= 1
-    if keyState[2] and BombPlayer.wait == 0:
-        BombPlayer.wait = 10
-        bombPlayerAdd()
-            
+    Game.loadImage("sm_title.png", "sm_bg.png")
+    Player.loadImage("sm_player.png")
+    Enemy.loadImage(["sm_enemyL.png", "sm_enemyR.png",
+        "sm_explosion1.png", "sm_explosion2.png"])
+    BombPlayer.loadImage("sm_bombP.png")
+    BombEnemy.loadImage("sm_bombE.png")
+               
 def enemyMove():
     for e in enemy:
         e.move()
@@ -221,7 +264,6 @@ def enemyMove():
         enemyAdd()
     
 def enemyDisp():
-    global score
     for e in enemy:
         e.display()
         if e.isAlive():
@@ -230,10 +272,10 @@ def enemyDisp():
                     b.x < e.x + 76 and b.x + 10 > e.x:
                     b.unuse()
                     e.explosion()
-                    score += 100
+                    game.addScore(100)
                     break
             else:
-                if gseq == 1 and random(1000) < 10:
+                if game.isPlay() and random(1000) < 10:
                     bombEnemyAdd(int(e.x), e.y)
         elif e.isUsed():
             e.inExplosion()
@@ -269,40 +311,26 @@ def bombEnemyAdd(x, y):
             break
         
 def bombEnemyMove():
-    global gseq
     for b in bombE:
         b.move()
         if b.y == 60 and b.x < player.x + player.w and b.x + 16 > player.x:
-            gseq = GAME_OVER
-            
-def scoreDisp():
-    textSize(24)
-    fill(0, 0, 0)
-    text("score: {}".format(score), 10, 25)
-                
+            game.done()
+                           
 def keyPressed():
-    global keyState, gseq, tcnt
     if key == CODED:
         if keyCode == LEFT:
-            keyState[0] = True
+            Game.setKey(Game.KEY_LEFT)
         if keyCode == RIGHT:
-            keyState[1] = True
+            Game.setKey(Game.KEY_RIGHT)
     if key == ' ':
-        keyState[2] = True
-    if gseq == 0 and tcnt > 60:
-        gseq = GAME_EXEC
-        tcnt = 0
-    if gseq == 2 and tcnt > 60:
-        gameInit()
-        gseq = GAME_EXEC
-        tcnt = 0
+        Game.setKey(Game.KEY_SPACE)
+    game.checkWaiting()
         
 def keyReleased():
-    global keyState
     if key == CODED:
         if keyCode == LEFT:
-            keyState[0] = False
+            Game.clrKey(Game.KEY_LEFT)
         if keyCode == RIGHT:
-            keyState[1] = False
+            Game.clrKey(Game.KEY_RIGHT)
     if key == ' ':
-        keyState[2] = False
+        Game.clrKey(Game.KEY_SPACE)
