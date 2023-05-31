@@ -192,8 +192,6 @@ class BombPlayer:
                 self.unuse()
         if self.isUsed():
             image(BombPlayer.img, self.x, self.y)
-        for i in range(BombPlayer.cnt):
-            image(BombPlayer.img, 230 + i * 26, 20) 
 
 class BombEnemy:
     img = None
@@ -303,6 +301,8 @@ def bombPlayerAdd():
 def bombPlayerMove():
     for b in bombP:
         b.move()
+    for i in range(BombPlayer.cnt):
+        image(BombPlayer.img, 230 + i * 26, 20) 
         
 def bombEnemyAdd(x, y):
     for b in bombE:
