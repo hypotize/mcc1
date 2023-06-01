@@ -62,7 +62,6 @@ class Game:
         bombEnemyMove()
         self.scoreDisp()
     def over(self):
-        print("game over")
         player.display()
         image(Game.bgImg, 0, 90, 600, 360)
         enemyDisp()
