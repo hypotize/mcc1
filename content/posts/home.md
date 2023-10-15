@@ -25,6 +25,8 @@ readingTime = false
 
 ### 今後の開催予定 (2023年)
 
+NEW! 参加できる日は、[このフォーム](https://docs.google.com/forms/d/e/1FAIpQLSfEs_tJLCWqL4_ImyIpylQi3TEqLihmfyuFXHYS_2jq38My9A/viewform)で参加を教えてください
+
 |日にち|開催|
 |----|----|
 |10月15日|開催|
