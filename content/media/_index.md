@@ -16,6 +16,6 @@ readingTime = false
 
 三浦コンピュータクラブは下記の通り、メデイアにピックアップされています。
 
-[タウンニュース](https://www.townnews.co.jp/0502/2022/03/18/617224.html)
-[ニナイテ便り](https://www.miuracc.org/%E3%83%8B%E3%83%8A%E3%82%A4%E3%83%86%E4%BE%BF%E3%82%8A202310/)
+* [タウンニュース](https://www.townnews.co.jp/0502/2022/03/18/617224.html)
+* [ニナイテ便り](https://www.miuracc.org/%E3%83%8B%E3%83%8A%E3%82%A4%E3%83%86%E4%BE%BF%E3%82%8A202310/)
 
