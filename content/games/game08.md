@@ -6,6 +6,7 @@ author = "Yoshio Hashimoto"
 
 showFullContent = true
 readingTime = false
+tags = ["ゲーム", "パズル", "初級"]
 +++
 
 今日もパズルゲームを用意しました。じっくり考えてみましょう。

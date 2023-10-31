@@ -6,6 +6,7 @@ author = "Michael Cashen"
 
 showFullContent = true
 readingTime = false
+tags = ["ゲーム", "クイズ", "ツール", "初級"]
 +++
 
 今日のゲームの時間で、みんなでいろいろ競争して、スコアを競い合いましょう。

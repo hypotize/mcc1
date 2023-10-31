@@ -5,6 +5,7 @@ author = "Michael Cashen"
 description = "スクラッチで作ったゲームをみて、同じゲームをPythonでも見てみよう"
 showFullContent = false
 readingTime = false
+tags = ["ゲーム", "スクラッチ", "Python", "中級"]
 +++
 
 # レッスンの目標

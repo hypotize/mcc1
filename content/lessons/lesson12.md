@@ -6,6 +6,7 @@ description = "HTMLを先生と一緒に作って行きましょう"
 
 showFullContent = false
 readingTime = false
+tags = ["クイズ", "HTML", "中級"]
 +++
 
 # レッスンの目標

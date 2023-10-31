@@ -5,6 +5,7 @@ author = "小野寺 健"
 description = "パイソン入門 - エクササイズ" 
 showFullContent = false
 readingTime = false
+tags = ["プログラミング", "Python", "上級"]
 +++
 
 # レッスンの目標

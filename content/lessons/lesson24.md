@@ -5,6 +5,7 @@ author = "小野寺 健"
 description = "プロセッシングで遊んでみよ" 
 showFullContent = false
 readingTime = false
+tags = ["プログラミング", "プロセッシング", "Python", "上級"]
 +++
 
 # レッスンの目標

@@ -5,6 +5,7 @@ author = "Michael Cashen"
 description = "マイケル株式会社で働いて、資料作りを体験しましょう。"
 showFullContent = false
 readingTime = false
+tags = ["マイケル株式会社", "スライド", "スプレッドシート", "初級"]
 +++
 
 # レッスンの目標

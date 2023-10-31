@@ -5,6 +5,7 @@ author = "Michael Cashen"
 description = "ちょっと意地悪なクイズ" 
 showFullContent = false
 readingTime = false
+tags = ["クイズ", "スプレッドシート", "初心者"]
 +++
 
 # レッスンの目標

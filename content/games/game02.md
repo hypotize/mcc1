@@ -6,6 +6,7 @@ author = "Yoshio Hashimoto"
 
 showFullContent = true
 readingTime = false
+tags = ["ゲーム", "お絵描き", "初心者"]
 +++
 いろいろすごいツールを触ってみましょう。またレッスン中にAIを説明します。
 

@@ -5,6 +5,7 @@ author = "Michael Cashen"
 description = "パイソンあそび - タイマー" 
 showFullContent = false
 readingTime = false
+tags = ["プログラミング", "Python", "中級"]
 +++
 
 # レッスンの目標

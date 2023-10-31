@@ -6,6 +6,7 @@ description = "スプレッドシートで遊んでみよう"
 
 showFullContent = false
 readingTime = false
+tags = ["表計算", "スプレッドシート", "初級"]
 +++
 
 # レッスンの目標

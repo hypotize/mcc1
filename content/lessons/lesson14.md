@@ -5,6 +5,7 @@ author = "Yoshio Hashimoto"
 description = "スクラッチで迷路ゲームを作ってみよう！"
 showFullContent = false
 readingTime = false
+tags = ["ゲーム", "スクラッチ", "初級"]
 +++
 
 # レッスンの目標

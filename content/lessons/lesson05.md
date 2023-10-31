@@ -5,6 +5,7 @@ author = "橋本　吉生 + Michael Cashen"
 description = "Pythonの画像処理のライブラリーを使って、いろいろな画像の処理の方法をみてみましょう"
 showFullContent = false
 readingTime = false
+tags = ["画像作成", "プログラミング", "Python", "中級"]
 +++
 
 # レッスンの目標

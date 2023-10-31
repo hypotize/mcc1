@@ -5,6 +5,7 @@ author = "Yoshio Hashimoto"
 description = "ウェブで公開されているフリーのフォントで遊ぼう"
 showFullContent = false
 readingTime = false
+tags = ["お絵描き", "フォント", "初級"]
 +++
 
 # レッスンの目標
