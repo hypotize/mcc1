@@ -5,6 +5,7 @@ author = "Yoshio Hashimoto"
 description = "順番にスクラッチでゲーム作り"
 showFullContent = false
 readingTime = false
+tags = ["ゲーム", "スクラッチ", "初級"]
 +++
 
 # レッスンの目標

@@ -6,6 +6,7 @@ description = "グラフで遊んでみよう"
 
 showFullContent = false
 readingTime = false
+tags = ["グラフ", "学習サイト", "初級"]
 +++
 
 # レッスンの目標

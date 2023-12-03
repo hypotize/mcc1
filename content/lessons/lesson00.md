@@ -6,6 +6,7 @@ description = "自己紹介を作りましょう。"
 
 showFullContent = false
 readingTime = false
+tags = ["ツール", "スライド", "お絵描き", "初心者"]
 +++
 
 # レッスンの目標

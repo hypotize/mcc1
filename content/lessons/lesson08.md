@@ -5,6 +5,7 @@ author = "Yoshio Hashimoto"
 description = "プログラミングのサイトで、プログラミングの基本をやってみましょう"
 showFullContent = false
 readingTime = false
+tags = ["プログラミング", "学習サイト", "中級"]
 +++
 
 # レッスンの目標

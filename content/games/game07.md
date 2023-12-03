@@ -6,6 +6,7 @@ author = "Yoshio Hashimoto"
 
 showFullContent = true
 readingTime = false
+tags = ["ゲーム", "スプレッドシート", "初級"]
 +++
 
 今日はスプレッドシートであそぶゲームです。このシートを開いて、コピーを作って、遊んでみてください。[6つのブロック](https://docs.google.com/spreadsheets/d/1stc6_Peo2Lft8oVsr3QAOM8a2pHbqb0gVS4EQmVK5S0/edit#gid=0)

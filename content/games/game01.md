@@ -6,6 +6,7 @@ author = "Michael Cashen"
 
 showFullContent = true
 readingTime = false
+tags = ["ゲーム", "お絵描き", "初心者"]
 +++
 
 みんなそれぞれのパソコンで同じGoogle Meetにつなぎます。

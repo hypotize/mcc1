@@ -5,6 +5,7 @@ author = "Michael Cashen"
 description = "マイケル株式会社の会計処理"
 showFullContent = false
 readingTime = false
+tags = ["マイケル株式会社", "表計算", "スプレッドシート", "初級"]
 +++
 
 # レッスンの目標

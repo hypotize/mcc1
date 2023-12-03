@@ -5,6 +5,7 @@ author = "Michael Cashen"
 description = "いろいろチャレンジ - 曲を作って、絵を描いて、動画も編集して、タイピングも練習してみよう"
 showFullContent = false
 readingTime = false
+tags = ["ツール", "お絵描き", "初心者"]
 +++
 
 # レッスンの目標

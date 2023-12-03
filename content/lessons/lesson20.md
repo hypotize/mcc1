@@ -5,6 +5,7 @@ author = "小野寺 健"
 description = "ゲーム入門 りんご拾い" 
 showFullContent = false
 readingTime = false
+tags = ["プログラミング", "ゲーム", "Python", "中級"]
 +++
 
 # レッスンの目標

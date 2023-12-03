@@ -6,6 +6,7 @@ description = "マイケル株式会社のホームページ作ろう"
 
 showFullContent = false
 readingTime = false
+tags = ["マイケル株式会社", "ホームページ", "HTML", "中級"]
 +++
 
 # レッスンの目標

@@ -6,6 +6,7 @@ author = "Michael Cashen"
 
 showFullContent = true
 readingTime = false
+tags = ["ゲーム", "クイズ", "チャット", "初心者"]
 +++
 
 グーグルスプレッドシートでクイズを作ったので、やってみましょう。このシートを開いて、コピーを作りましょう。コピーで正解を入力してみましょう。[クイズのシート](https://docs.google.com/spreadsheets/d/1HQ5_bWdEFcFj4iS7l_4PYHijr_xKQ_89ctMa4qs7dbQ/edit#gid=0)

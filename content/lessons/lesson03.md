@@ -5,7 +5,7 @@ author = "Michael Cashen"
 description = "GitHub、Gitとマークダウンの勉強" 
 showFullContent = false
 readingTime = false
-
+tags = ["ツール", "GitHub", "マークダウン", "初心者"]
 +++
 
 # レッスンの目標

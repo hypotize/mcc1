@@ -5,6 +5,7 @@ author = "橋本　吉生"
 description = "スクラッチでタワーディフェンスゲームを作ってみよう" 
 showFullContent = false
 readingTime = false
+tags = ["ゲーム", "スクラッチ", "初級"]
 +++
 
 # レッスンの目標

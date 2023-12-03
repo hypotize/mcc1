@@ -6,6 +6,7 @@ author = "Michael Cashen"
 
 showFullContent = true
 readingTime = false
+tags = ["ゲーム", "クイズ", "チャット", "初心者"]
 +++
 
 クラブ用にかんたんにチャットができるページを立てました。アクセスして見ましょう。[https://club.miura.io/chat/](https://club.miura.io/chat/index.php)

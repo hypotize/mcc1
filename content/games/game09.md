@@ -6,6 +6,7 @@ author = "Michael Cashen"
 
 showFullContent = true
 readingTime = false
+tags = ["ゲーム", "スクラッチ", "初心者"]
 +++
 <iframe width="800" height="300" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSizRk7KEV-jPaV1WOB_pDDkMe7k9efZfSWXgB-mkkZAqbiAq6N8Gpj_2UFvapfflkSxHLfEMiG8JUe/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
 
