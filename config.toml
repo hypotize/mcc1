@@ -91,16 +91,16 @@ paginate = 5
       name = "レッスン"
       url = "/lessons"
       weight = 5      
-    [[menu.main]]
-      identifier = "f"
-      name = "ゲーム"
-      url = "/games"
-      weight = 6      
-    [[menu.main]]
-      identifier = "g"
-      name = "作品"
-      url = "/creations"
-      weight = 7     
+#    [[menu.main]]
+#      identifier = "f"
+#      name = "ゲーム"
+#      url = "/games"
+#      weight = 6      
+#    [[menu.main]]
+#      identifier = "g"
+#      name = "作品"
+#      url = "/creations"
+#      weight = 7     
     [[menu.main]]
       identifier = "h"
       name = "先生募集"
@@ -111,6 +111,11 @@ paginate = 5
       name = "メデイア"
       url = "/media"
       weight = 9      
+    [[menu.main]]
+      identifier = "i"
+      name = "パソコン寄附のお願い"
+      url = "/donate"
+      weight = 10      
 
 [markup.goldmark.renderer]
 unsafe = true
