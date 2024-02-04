@@ -1,6 +1,6 @@
 +++
 title = "三浦コンピュータクラブ 文化祭 1月28日 開催決定！" 
-date = "2024-01-01T16:30:00+09:00"
+date = "2034-01-01T16:30:00+09:00"
 author = "Michael Cashen"
 authorTwitter = "michaelcashen" #do not include @
 cover = ""
