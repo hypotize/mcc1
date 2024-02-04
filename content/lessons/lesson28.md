@@ -13,7 +13,7 @@ HTMLでスライドショーを作ろう
 コマンドラインから以下のコマンドでindex.htmlとstylesheet.cssをそれぞれindex2.html、stylesheet2.cssにコピーします。
 ```
 cp index.html index2.html
-cp stylesheet.css stylesheet2.html
+cp stylesheet.css stylesheet2.css
 ```
 ## index2.htmlの書き換え
 `index2.html`を以下のように書き換えます。
@@ -23,7 +23,7 @@ cp stylesheet.css stylesheet2.html
 	<link rel="stylesheet" href="stylesheet2.css">
 ```
 ### `<table></table>`の書き換え
-`<table>...</table>`を`<div class="slider">...</div>に書き換えます。
+`<table>...</table>`を`<div class="slider">...</div>`に書き換えます。
 ### `<tr></tr>`の削除と`<td></td>`の書き換え
 `<tr>...</tr>`は不要なので削除します。
 `<td>...</td>`を`<div class="slider-item">...</div>`に書き換えます。
