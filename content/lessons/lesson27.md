@@ -129,27 +129,27 @@ class Ball(Sprite):
 ...
 def main():
 	cup = Cup()
-	balls = []
-	ballcnt = 0
-	start = False
+	balls = []			# <-- 追加
+	ballcnt = 0			# <-- 追加 
+	start = False		# <-- 追加
 	while:
 		...
-			if event.keu == K_SPAVE:
+			if event.key == K_SPACE:
 				cup.setxy(0, -100)
-				start = True
+				start = True		# <-- 追加
 		...
-		if start:
-			ballcnt += 1
-			if ballcnt == 30:
-				ball = Ball()
-				ball.setxy(0, 150)
-				balls.append(ball)
-				ballcnt = 0
+		if start:								# <-- 追加
+			ballcnt += 1					# <-- 追加
+			if ballcnt == 30:			# <-- 追加
+				ball = Ball()				# <-- 追加
+				ball.setxy(0, 150)	# <-- 追加
+				balls.append(ball)	# <-- 追加
+				ballcnt = 0					# <-- 追加
 		SURFACE.fill((255, 255, 255))
 		cup.draw()
-		for ball in balls:
-			ball.draw()
-			ball.setdy(-5)
+		for ball in balls:			# <-- 追加
+			ball.draw()						# <-- 追加
+			ball.setdy(-5)				# <-- 追加
 		pygame.display.update()
 		...
 ```
@@ -167,24 +167,24 @@ class Ball(Sprite):
 	_image = pygame.image.load("ball.svg")
 	def __init__(self):
 		super().__init__(Ball._image)
-		self.alive = True
+		self.alive = True		# <-- 追加
 ```
 無効なボールを削除するため、ボールが有効か否かの変数`alive`を追加します。
 ```python
 def main():
 	...
 	start = False
-	failsound = pygame.mixer.Sound("failed.wav")
+	failsound = pygame.mixer.Sound("failed.wav")	# <-- 追加
 	while True:
 		...
 		for ball in balls:
 			ball.draw()
-			if ball.gety() < -50:
-				failsound.play()
-				ball.alive = False
-			else:
-				ball.setdy(-5)
-		balls = [ball for ball in balls if ball.alive]
+			if ball.gety() < -50:	# <-- 追加
+				failsound.play()		# <-- 追加 
+				ball.alive = False	# <-- 追加
+			else:									# <-- 追加
+				ball.setdy(-5)			# <-- 変更（インデント追加）
+		balls = [ball for ball in balls if ball.alive]	# <-- 追加
 ```
 まず、失敗音「Oops」を追加し、`failsound`変数に設定します。
 ボールのy座標が-50未満の場合、失敗音を鳴らし(`play()`）、ボールを無効にします。
@@ -195,15 +195,15 @@ def main():
 	...
 	start = False
 	failsound = pygame.mixer.Sound("failed.wav")
-	succeedsound = pygame.mixer.Sound("succeed.wav")
+	succeedsound = pygame.mixer.Sound("succeed.wav")	# <-- 追加
 	while True:
 		...
 		for ball in balls:
 			ball.draw()
-			if ball.rect.colliderect(cup.rect):
-				succeedsound.play()
-				ball.alive = False
-			elif ball.gety() < -50:
+			if ball.rect.colliderect(cup.rect):		# <-- 追加
+				succeedsound.play()									# <-- 追加
+				ball.alive = False									# <-- 追加
+			elif ball.gety() < -50:								# <-- 変更(if --> elif)
 				failsound.play()
 				ball.alive = False
 			else:
@@ -217,7 +217,7 @@ def main():
 そのためには-1, 0, 1の数をでたらめに作ってその値に100をかけ、その値をボールのx座標にします。
 ```python
 				ball = Ball()
-				ball.setxy(random.randint(-1, 1) * 100, 150)
+				ball.setxy(random.randint(-1, 1) * 100, 150)	# <-- 変更
 ```
 `random.randint(a, b)`はa以上b以下の整数をでたらめ（ランダム）に返す関数です。
 ## 3回失敗したらゲームを終了させる
@@ -225,13 +225,13 @@ def main():
 ```python
 def main():
 	...
-	failcnt = 0
+	failcnt = 0		# <-- 追加
 	while True:
 	...
 				if event.key == K_SPACE:
 					cup.setxy(0, -100)
 					start = True
-					failcnt = 0
+					failcnt = 0	# <-- 追加
 ```
 メイン関数`main()`の初期化部分で失敗回数変数`failcnt`を定義し、0に初期化します。
 また、ゲーム開始時には、0に初期化します。
@@ -241,10 +241,10 @@ def main():
 			elif ball.gety() < -50:
 				failsound.play()
 				ball.alive = False
-				failcnt += 1
-				if failcnt > 2:
-					start = False
-					balls.clear()
+				failcnt += 1			# <-- 追加
+				if failcnt > 2:		# <-- 追加
+					start = False		# <-- 追加
+					balls.clear()		# <-- 追加
 ```
 ウィンドウを閉じたときのように`pygame.quit()`と`sys.exit()`を呼ぶようにすれば完全にプログラムは終了しますが、スクラッチのように再開できないので、`start`変数とボールリストを空にすることで、擬似的にゲーム終了状態にします。
 プログラムは終了していないので、「スペースキーを押す」ことでいつでもゲームを再開できます。
@@ -254,15 +254,15 @@ def main():
 ```python
 def main():
 	...
-	font = pygame.font.Font("../onodera/ipaexg.ttf", 16)
+	font = pygame.font.Font("../onodera/ipaexg.ttf", 16)	# <-- 追加
 	while True:
 	...
 ```
 まず、メイン関数の先頭の初期化部分でフォント（文字）の設定を行います。16というのはフォントの大きさが16ポイント（文字の大きさの単位）であるということです。
 ```python
 	...
-	fail_image = font.render("失敗回数 "+str(failcnt), True, (0, 0, 0))
-	SURFACE.blit(fail_image, (0, 0))
+	fail_image = font.render("失敗回数 "+str(failcnt), True, (0, 0, 0))	# <-- 追加
+	SURFACE.blit(fail_image, (0, 0))	# <-- 追加
 	pygame.display.update()
 ```
 `pygame.display.update()`の直前に失敗変数を描画する処理を追加します。
@@ -278,18 +278,18 @@ class Ball(Sprite):
 	...
 	def __init__(self):
 		...
-		self.speed = random.randint(-9, -5)
+		self.speed = random.randint(-9, -5)	# <-- 追加
 ```
 ボールの初期化関数`__init__()`の最後に`speed`という変数を追加し、-9から-5まででたらめ（ランダム）な値を設定します。
 ```python
 	else:
-		ball.setdy(ball.speed)
+		ball.setdy(ball.speed)	# <-- 変更
 ```
 `setdy()`関数で各ボールのy座標を更新する部分を-5という固定値から`ball.speed`という変数に変更します。
 ## ボールのクローンを作る間隔を短くする
 ゲームを難しくするため、ボールのクローンを作る間隔を0.5秒にします。
 ```python
-			if ballcnt == 15:
+			if ballcnt == 15:	# <-- 変更
 				ball = Ball()
 ```
 カウンタ`ballcnt`は1秒に30回更新されるので、1秒に1回から0.5秒に1回にするためには30から15に変更します。
@@ -298,38 +298,38 @@ class Ball(Sprite):
 ```python
 def main():
 	...
-	score = 0
+	score = 0		# <-- 追加
 	while True:
 	...
 			if event.key == K_SPACE:
 				...
-				score = 0
+				score = 0		# <-- 追加
 ```
 コップに触れたとき、点数を1増やす。
 ```python
 			...
 			if ball.rect.colliderect(cup.rect):
 			...
-				score += 1
+				score += 1	# <-- 追加
 ```
 画面の失敗回数の下に表示する
 ```python
 		...
 		SURFACE.blit(fail_image, (0, 0))
-		score_image = font.render("点数 "+str(score), True, (0, 0, 0))
-		SURFACE.blit(score_image, (0, 20))
+		score_image = font.render("点数 "+str(score), True, (0, 0, 0))		# <-- 追加
+		SURFACE.blit(score_image, (0, 20))	# <-- 追加
 ```
 ここまでできたら、実行し、点数が表示され、ボールの速さがでたらめ（ランダム）に変わり、ボールの出現間隔が短くなったことを確認してください。
 ## 取ってはいけないカミナリを作る
 取ると失敗になるカミナリを追加します。
 ボールに似ているので、ボールをコピーし、一部を書き換えます。
 ```python
-class Lightning(Sprite):
-	_image = pygame.transform.scale_by(pygame.image.load("lightning.svg"), 0.5)
-	def __init__(self):
-		super().__init__(Lightning._image)
-		self.alive = True
-		self.speed = -10
+class Lightning(Sprite):	# <-- 追加
+	_image = pygame.transform.scale_by(pygame.image.load("lightning.svg"), 0.5)		# <-- 追加
+	def __init__(self):		# <-- 追加
+		super().__init__(Lightning._image)	# <-- 追加
+		self.alive = True		# <-- 追加
+		self.speed = -10		# <-- 追加
 ```
 クラスの名前をBallからLightningに変更し、クラス変数`_image`を参照する部分も`Ball._image`から`Lightning._image`に変更します。
 なお、このままの大きさだとカミナリ画像が大きすぎるので`pygame.transform.scale_by()`関数で画像のサイズを半分に変更します。
@@ -340,37 +340,37 @@ class Lightning(Sprite):
 ボールとカミナリからメイン関数の変数にアクセスできるよう必要な変数をグローバル化します。
 ```python
 def main():
-	global succeedsound, failsound, score, failcnt, start, balls
+	global succeedsound, failsound, score, failcnt, start, balls	# <-- 追加
 ```
 ### ボールの処理の変更
 次にボールがコップに触れた処理をボールの`touch()`関数に移し、ボールがコップに触れた場合、`touch()`関数を呼ぶように変更します。
 ```python
 def Ball(Sprite):
 	...
-	def touch(self):
-		global succeedsound, score
-		succeedsound.play()
-		self.alive = False
-		score += 1
+	def touch(self):	# <-- 追加
+		global succeedsound, score	# <-- 追加
+		succeedsound.play()	# <-- 追加
+		self.alive = False	# <-- 追加
+		score += 1	# <-- 追加
 	...
 def main():
 	...
 				if ball.rect.colliderect(cup.rect):
-					ball.touch()
+					ball.touch()	# <-- 変更
 ```
 ### カミナリの処理の追加
 カミナリがコップに触れた処理をカミナリの`touch()`関数に追加します。
 ```python
 class Lightning(Sprite):
 	...
-	def touch(self):
-		global failsound, failcnt, start, balls
-		failsound.play()
-		self.alive = False
-		failcnt += 1
-		if failcnt > 2:
-			start = False
-			balls.clear()
+	def touch(self):	# <-- 追加
+		global failsound, failcnt, start, balls	# <-- 追加
+		failsound.play()		# <-- 追加
+		self.alive = False	# <-- 追加
+		failcnt += 1				# <-- 追加
+		if failcnt > 2:			# <-- 追加
+			start = False			# <-- 追加
+			balls.clear()			# <-- 追加
 ```
 ## 落ちた時の処理
 落ちた時の処理も、ボールとカミナリでは異なるので、ボールとカミナリそれぞれに`drop()`という関数を用意して、それぞれ処理を変えるようにします。
@@ -379,34 +379,34 @@ class Lightning(Sprite):
 ```python
 class Ball(Sprite):
 	...
-	def drop(self):
-		global failsound, failcnt, start, ball
-		failsound.play()
-		self.alive = False
-		failcnt += 1
-		if failcnt > 2:
-			start = False
-			balls.clear()
+	def drop(self):		# <-- 追加
+		global failsound, failcnt, start, ball	# <-- 追加
+		failsound.play()		# <-- 追加
+		self.alive = False	# <-- 追加
+		failcnt += 1				# <-- 追加
+		if failcnt > 2:			# <-- 追加
+			start = False			# <-- 追加
+			balls.clear()			# <-- 追加
 	...
 def main():
 	...
 				elif ball.gety() < -50:
-					ball.drop()
+					ball.drop()		# <-- 変更
 ```
 ### カミナリの処理の追加
 カミナリが落ちた処理をカミナリの`drop()`関数に追加します。
 ```python
 class Lightning(Sprite):
 	...
-	def drop(self):
-		self.alive = False
+	def drop(self):	# <-- 追加
+		self.alive = False	# <-- 追加
 ```
 ### 5秒に1回カミナリを発生させる
 0.5秒間隔でボールを発生させる部分を変更し、5秒に1回はカミナリが発生するようにします。
 発生カウント`ballcnt`はそのまま使用するので、15になったらボールを発生させて0に戻す処理を以下のように変更します。
 ```python
 			ballcnt += 1
-			if ballcnt % 15 == 0:
+			if ballcnt % 15 == 0:	# <-- 変更
 				ball = Ball()
 				ball.setxy(random.randint(-1, 1) * 100, 150)
 				balls.append(ball)
@@ -416,10 +416,10 @@ class Lightning(Sprite):
 ```python
 			ballcnt += 1
 			if ballcnt % 15 == 0:
-				if ballcnt % 150 == 0:
-					ball = Lightning()
-				else:
-					ball = Ball()
+				if ballcnt % 150 == 0:	# <-- 追加
+					ball = Lightning()		# <-- 追加
+				else:										# <-- 追加
+					ball = Ball()					# <-- 変更（インデント追加)
 				ball.setxy(random.randint(-1, 1) * 100, 150)
 				balls.append(ball)
 ```
