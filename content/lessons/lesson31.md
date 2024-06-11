@@ -82,10 +82,13 @@ Hello World
 ```
 これでサーバープログラムで作成した内容がWebブラウザに表示されるようになりました。
 
+### 課題１
+`Hello World`の部分を好きな文字列に書き換えて、変更した文字列がWebブラウザ上に表示されることを確認してください。
+
 ## テンプレート利用環境の作成
 文字を表示するだけでなく、いろいろなホームページの機能を利用できるようにするため、テンプレートを作成します。
 
-そのため、ターミナルで以下のディレクトリを作成します。
+そのため、ターミナルで`flaskworks`の下に以下のディレクトリを作成します。
 ```
 mkdir templates
 ```
@@ -124,7 +127,7 @@ mkdir templates
 先ほどの`index.py`を`index.html`を使用するように以下のように書き換えます。
 ```python
 from flask import Flask, render_template
-app = Flask(__nama__)
+app = Flask(__name__)
 
 @app.route('/')
 def index():
@@ -146,7 +149,8 @@ Hello
 
 テンプレートだよ
 ```
-`message=''`に様々な文字に変えるとHelloの部分が変わります。
+### 課題２
+`index.py`の中の`message='Hello'`の「Hello」の部分を好きな文字列に書き換え、さらに`index.html`の中の`<p>テープレートだよ</p>`の「テンプレートだよ」の部分を好きな文字列に書き換えて、それぞれ書き換えられた文字列に変更されるか確認してください。
 
 ## ルーティング
 １つのサーバーから、色々なページのデータを取得できる仕組みのことを**ルーティング**といいます。
@@ -154,7 +158,7 @@ Hello
 `index.py`を書き換えて、ルーティングの仕組みを学びましょう。
 ```python
 from flask import Flask, render_template
-app = Flask(__nama__)
+app = Flask(__name__)
 
 @app.route('/')
 def index():
@@ -190,6 +194,10 @@ Hello World
 と表示されます。
 
 このように**ルーティング**の仕組みを使うと、色々なページのデータを取得できるようになります。
+
+### 課題３
+`index.py`の`@app.route('/')`の中の`message='indexページ'`の内容と
+`@app.route('/hello/')`の中の`message='Hello World'`の内容をそれぞれ書き換えて、`http://127.0.0.1:5000/`と`http://127.0.0.1:5000/hello/`でそれぞれ書き換えた内容に変更されているか確認してください。
 
 ## フォームを受け取る
 フォームから入力データを受け取ってみましょう。
@@ -263,6 +271,9 @@ python3 index.py
 <input type="text" id="msg" name="msg">
 <input type="submit" value="名前">
 <p>入力されていません。</p>
+
+### 課題４
+`index.py`の`return render_template('index.html', message='私の名前は'+msg+'です。')`の`message`の内容を書き換え、入力された名前(msg)を使って、好きな文字列を表示させてください。
 
 ## 簡単なクイズを作る
 フォームから入力データを受け取る仕組みを使って簡単なクイズを作ってみましょう。
@@ -355,6 +366,8 @@ if __name__=='__main__':
 <input type="submit" value="名前">
 <p>解答が入力されていません。</p>
 
+### 課題５
+`index.html`の`<p> ４月を英語で何というでしょう。すべて小文字で答えてください </p>`の部分を自分で考えたクイズの問題に書き換え、クイズの解答は、`index.py`の`if msg == 'april':`を書き換え、自分のオリジナルのクイズに変更しましょう。
 
 ## ラジオボタンで選択する
 クイズの答えを入力するのに文字を入力するようにすると、答えが完全に一致しないと正解かどうか判断できません。
@@ -449,117 +462,34 @@ python3 index.py
 「May: 不正解です」あるいは「June: 不正解です」と表示されます。
 
 なお、値を入力しないで解答ボタンを押したり、ブラウザから直接`http://127.0.0.1:5000/send`にアクセスすると、「解答が入力されていません。」と表示されます。
+
+### 課題６
+`index.html`の
+```
+    <p>４月を英語で何と言いますか？以下から正解を選択してください</p>
+    <input type='radio' name='question' value='April'>April
+    <input type='radio' name='question' value='May'>May
+    <input type='radio' name='question' value='June'>June
+```
+の部分を自分の好きなクイズ問題と、その選択肢に書き換えてください。なお、選択肢の数はいくつでも構いません。
+
+また、`index.py`の`if msg == 'April'`の部分を解答に書き換えてください。
+
 ## データからの読み込み
 クイズの内容を変える度に、問題と答えをテンプレートやプログラム上で書き換えるのは大変なので、データから読み出すように変更します。
 
 データは最終的にはCSVファイルから読み込むようにしますが、まずは以下のデータリストに設定します。
 ```python
-data = ['４月を英語で何と言いますか？以下から正解を選択してください', 'April', 'May', 'Jun', 'April']
+data = [
+    ['４月を英語で何と言いますか？以下から正解を選択してください', 'April', 'May', 'Jun', 'April'],
+    ['うるう年で月の日数が変わるのは何月ですか?','2月','3月','12月','2月']
+]
 ```
-データリストは、「問題、選択肢１、選択肢２...、解答」という風になっています。
-###  base.html
-`base.html`は変更ありません。
-### index.html
-```html
-{%extends "base.html" %}
-{% block question %}
-    <p>{{ question }} </p>
-    {% for choice in choices %}
-        <input type='radio' name='question' value='{{ choice }}'>{{ choice }}
-    {% endfor %}
-    <p>
-{% endblock %}
-{% block  answer %} 
-    <p>{{ answer }}</p>
-{% endblock %}
-```
-質問を「question」変数、解答を「answer」変数、選択肢を「choices」リスト変数に置き換えます。
-### index.pyの変更
-データリストから上記変数に変換して呼び出すよう、`index.py`を以下のように変更します。
-```python
-from flask import Flask, render_template, request
-app = Flask(__name__)
-
-data = ['４月を英語で何と言いますか？以下から正解を選択してください', 'April', 'May', 'June', 'April']
-
-@app.route('/')
-def index():
-    return render_template('index.html', question=data[0], choices=data[1:-1])
-
-@app.route('/send', methods=['GET','POST'])
-def send():
-    if request.method == 'POST' and 'question' in request.form:
-        answer = request.form['question']
-        if answer == data[-1]:
-            return render_template('index.html', question=data[0], choices=data[1:-1],answer=answer+': 正解です。')
-        else:
-            return render_template('index.html', question=data[0], choices=data[1:-1],answer=answer+': 不正解です。')
-    else:
-        return render_template('index.html', question=data[0], choices=data[1:-1], answer='解答が入力されていません。')
-
-if __name__=='__main__':
-    app.debug = True
-    app.run()
-```
-### 実行
-ターミナルから再実行します。
-```
-python3 index.py
-```
-先ほどと同じ結果が得られるはずです。
-## CSVファイルからの読み込み
-先ほどのデータを以下のようなCSVファイルにして、`index.py`と同じフォルダに`data.csv`という名前で保存します。
-```
-４月を英語で何と言いますか？以下から正解を選択してください,April,May,Jun,April
-```
-### index.pyの変更
-htmlファイルの変更はありません。
-
-CSVファイルからデータリストに読み込むよう、`index.py`を以下のように変更します。
-
-```python
-from flask import Flask, render_template, request
-import csv
-app = Flask(__name__)
-
-data = None
-
-@app.route('/')
-def index():
-    return render_template('index.html', question=data[0], choices=data[1:-1])
-
-@app.route('/send', methods=['GET','POST'])
-def send():
-    if request.method == 'POST':
-        answer = request.form['question']
-        if answer == data[-1]:
-            return render_template('index.html', question=data[0], choices=data[1:-1],answer=answer+': 正解です。')
-        else:
-            return render_template('index.html', question=data[0], choices=data[1:-1],answer=answer+': 不正解です。')
-    else:
-        return render_template('index.html', answer='解答が入力されていません。')
-
-if __name__=='__main__':
-	with open('data.csv', encoding='utf_8') as f:
-		reader = csv.reader(f)
-		data = [row for row in reader][0]
-	app.debug = True
-	app.run()
-```
-### 実行
-実行して、結果が変わらないことを確認しましょう。
-
-## 複数の問題に対応する
-１問だけではつまないので、複数の問題に対応できるようにしましょう。
-
-問題のCSVファイル`data.csv`を以下のように複数の問題に変更します。
-```
-４月を英語で何と言いますか？,April,May,June,April
-閏年で月の日数が変わるのは何月ですか?,2月,3月,12月,2月
-```
+データリストは、「問題、選択肢１、選択肢２...、解答」というクイズデータが複数で構成されています。
 
 ###  base.html
 `base.html`は変更ありません。
+
 ### index.html
 答えも複数あるので、答えも項目ごとに「正解」か「不正解」にするよう変更します。
 ```html
@@ -589,13 +519,17 @@ if __name__=='__main__':
 	{{ answer }}
 {% endblock %}
 ```
+
 ### index.pyの変更
 ```python
 from flask import Flask, render_template, request
 import csv
 app = Flask(__name__)
 
-items = []
+data = [
+    ['４月を英語で何と言いますか？以下から正解を選択してください', 'April', 'May', 'Jun', 'April'],
+    ['うるう年で月の日数が変わるのは何月ですか?','2月','3月','12月','2月']
+]
 
 @app.route('/')
 def index():
@@ -622,36 +556,34 @@ def send():
 	if request.method == 'POST':
 		cnt = 0
 		for item in items:
-            if item['id'] in request.form:
-			    answer = request.form[item['id']]
-			    if answer == item['answer']:
-				    item['result'] = 1
-				    cnt += 1
-			    else:
-				    item['result'] = -1
-			    item['selected'] = answer
-            else:
-                item['result'] = -2
-                item['selected'] = ''
+			if item['id'] in request.form:
+				answer = request.form[item['id']]
+				if answer == item['answer']:
+					item['result'] = 1
+					cnt += 1
+				else:
+					item['result'] = -1
+				item['selected'] = answer
+			else:
+				item['result'] = -2
+				item['selected'] = ''
 		return render_template('index.html', items=items, answer=str(len(items))+'問中'+str(cnt)+'問正解')
 	else:
 		for item in items:
-		    item['result'] = -2
-		    item['selected'] = ''
-	    return render_template('index.html', items=items, answer='解答が入力されていません。')
+			item['result'] = -2
+			item['selected'] = ''
+		return render_template('index.html', items=items, answer='解答が入力されていません。')
 
 if __name__=='__main__':
-	with open('data.csv', encoding='utf_8') as f:
-		reader = csv.reader(f)
-		for id, row in enumerate(reader):
-			item = dict()
-			item['id'] = 'Q'+str(id)
-			item['question'] = row[0]
-			item['choices'] = row[1:-1]
-			item['result'] = 0
-			item['answer'] = row[-1]
-			item['selected'] = ''
-			items.append(item)
+	for id, row in enumerate(data):
+		item = dict()
+		item['id'] = 'Q'+str(id)
+		item['question'] = row[0]
+		item['choices'] = row[1:-1]
+		item['result'] = 0
+		item['answer'] = row[-1]
+		item['selected'] = ''
+		items.append(item)
 	app.debug = True
 	app.run()
 ```
@@ -666,7 +598,7 @@ if __name__=='__main__':
     <td><input type='radio' name='Q0' value='June'>June</td>
     </tr>
     <tr>
-    <th>閏年で月の日数が変わるのは何月ですか?</th>
+    <th>うるう年で月の日数が変わるのは何月ですか?</th>
     <td><input type='radio' name='Q1' value='2月'>2月</td>
     <td><input type='radio' name='Q1' value='3月'>3月</td>
     <td><input type='radio' name='Q1' value='12月'>12月</td>
@@ -685,7 +617,7 @@ if __name__=='__main__':
     <td>正解</td>
     </tr>
     <tr>
-    <th>閏年で月の日数が変わるのは何月ですか?</th>
+    <th>うるう年で月の日数が変わるのは何月ですか?</th>
     <td><input type='radio' name='Q1' value='2月'>2月</td>
     <td><input type='radio' name='Q1' value='3月'>3月</td>
     <td><input type='radio' name='Q1' value='12月' checked>12月</td>
@@ -696,5 +628,75 @@ if __name__=='__main__':
 <input type="submit" value="解答">
 <p>2問中1問正解</p>
 
-## 課題
+### 課題７
+`data`の部分を書き換えて、自分の好きなクイズを複数問つくりましょう。
+
+
+## CSVファイルからの読み込み
+先ほどのデータを以下のようなCSVファイルにして、`index.py`と同じフォルダに`data.csv`という名前で保存します。
+```
+４月を英語で何と言いますか？,April,May,June,April
+うるう年で月の日数が変わるのは何月ですか?,2月,3月,12月,2月
+```
+###  base.html
+`base.html`は変更ありません。
+### index.html
+`index.html`も変更ありません。
+### index.pyの変更
+```python
+from flask import Flask, render_template, request
+import csv
+app = Flask(__name__)
+
+items = []
+
+@app.route('/')
+def index():
+	for item in items:
+		item['result'] = 0
+		item['selected'] = ''
+	return render_template('index.html', items=items)
+
+@app.route('/send', methods=['GET','POST'])
+def send():
+	if request.method == 'POST':
+		cnt = 0
+		for item in items:
+			if item['id'] in request.form:
+				answer = request.form[item['id']]
+				if answer == item['answer']:
+					item['result'] = 1
+					cnt += 1
+				else:
+					item['result'] = -1
+				item['selected'] = answer
+			else:
+				item['result'] = -2
+				item['selected'] = ''
+		return render_template('index.html', items=items, answer=str(len(items))+'問中'+str(cnt)+'問正解')
+	else:
+		for item in items:
+			item['result'] = -2
+			item['selected'] = ''
+		return render_template('index.html', items=items, answer='解答が入力されていません。')
+
+if __name__=='__main__':
+	with open('data.csv', encoding='utf_8') as f:
+		reader = csv.reader(f)
+		for id, row in enumerate(reader):
+			item = dict()
+			item['id'] = 'Q'+str(id)
+			item['question'] = row[0]
+			item['choices'] = row[1:-1]
+			item['result'] = 0
+			item['answer'] = row[-1]
+			item['selected'] = ''
+			items.append(item)
+	app.debug = True
+	app.run()
+```
+### 実行
+実行結果は変わりませんが、`data.csv`ファイルを変更した場合は`python3 index.py`を一旦コントロールCで止めて、実行し直す必要があります。
+
+## 課題８
 `data.csv`を書き換えて、いろいろなクイズを作成してみましょう。
