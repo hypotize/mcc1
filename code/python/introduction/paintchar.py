@@ -84,7 +84,7 @@ def dialog(isOpen):
 	# ファイル選択
 	iDir = os.path.abspath(os.path.dirname(__file__))
 	filetypes = [("画像ファイル", ".png")]
-	filename = tkinter.filedialog.askopenfilename(filetypes=filetypes, title="ファイルを開く", initialdir=iDir) if isOpen else tkinter.filedialog.asksaveasfilename(filetypes=filetypes, title="ファイルを書き込む", initialdir=iDir, defaultextension="png")
+	filename = tkinter.filedialog.askopenfilename(filetypes=filetypes, title="ファイルを開く", initialdir=iDir) if isOpen else tkinter.filedialog.asksaveasfilename(filetypes=filetypes, title="ファイルを書き込む", initialdir=iDir, defaultextension=".png")
 	root.destroy()
 	return filename
 
