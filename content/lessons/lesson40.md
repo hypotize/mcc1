@@ -5,7 +5,7 @@ author = "橋本　吉生"
 description = "ちずをつくろう"
 showFullContent = false
 readingTime = false
-tags = ["Python", "地図", ""folium]
+tags = ["Python", "地図", "folium"]
 +++
 # ちずをつくろう
 
