@@ -40,7 +40,7 @@ tags = ["スプレッドシート", "自動計算", "ボウリング", "初級"]
 <tr>
     <td colspan="2" align="center">18</td>
     <td colspan="2" align="center">26</td>
-    <td colspan="2" align="center">46</td>
+    <td colspan="2" align="center">45</td>
     <td colspan="2" align="center">54</td>
     <td colspan="2" align="center">67</td>
     <td colspan="2" align="center">74</td>
