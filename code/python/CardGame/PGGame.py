@@ -468,8 +468,8 @@ class Golf(Game):
 			if not self.exist():
 				self.torifuda.remove(select)
 		elif self.daifuda is not None and \
-			abs(select.getCard().getNumber() - self.daifuda.getNumber()) == 1 or \
-			abs(select.getCard().getNumber() - self.daifuda.getNumber()) == 12:
+			(abs(select.getCard().getNumber() - self.daifuda.getNumber()) == 1 or \
+			abs(select.getCard().getNumber() - self.daifuda.getNumber()) == 12):
 			self.torifuda.remove(select)
 			next = select.getNext()
 			if next is not None:
