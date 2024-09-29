@@ -338,7 +338,7 @@ class Golf(Game):
 			None.
 
 			"""
-			CardWidth, CardHeight = Card.Dimensions(0)
+			CardWidth, CardHeight = Card.Dimensions(1)
 			if nodes is None:
 				self.next = None
 				self.left = x
@@ -385,7 +385,7 @@ class Golf(Game):
 			None.
 
 			"""
-			game.blit(self.card.getImage(0), self.left, self.top)
+			game.blit(self.card.getImage(1), self.left, self.top)
 		def getCard(self):
 			"""
 			場札のカードを返す
@@ -437,7 +437,7 @@ class Golf(Game):
 				self.bafuda.append(Golf.Node(self.bafuda, self.pop(), i))
 			else:
 				self.torifuda.append(Golf.Node(self.bafuda, self.pop(), i))
-		self.torifuda.append(Golf.Node(x=13, y=635))
+		self.torifuda.append(Golf.Node(x=13, y=535))
 		self.daifuda = None
 		
 	def click(self, x, y):
@@ -493,7 +493,7 @@ class Golf(Game):
 		for node in self.bafuda + self.torifuda:
 			node.paint(self)
 		if self.daifuda is not None:
-			self.blit(self.daifuda.getImage(0), 177, 635)
+			self.blit(self.daifuda.getImage(1), 177, 535)
 		if len(self.torifuda) == 0 or \
 			(len(self.torifuda) == 1 and self.torifuda[0].getCard() == Card.NONE):
 			font = pygame.font.SysFont(None, 48)
