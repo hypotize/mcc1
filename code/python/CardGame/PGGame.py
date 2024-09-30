@@ -633,6 +633,7 @@ class Pyramid(Game):
 		self.sutefuda = []
 		self.bafuda = []
 		self.misefuda = []
+		self.repeat = 3
 		for i in range(len(Pyramid.inittbl)):
 			parent = []
 			for j in range(2):
@@ -696,6 +697,12 @@ class Pyramid(Game):
 				select = node
 				break
 		if select is None:
+			width, height = Card.Dimensions(0)
+			if self.repeat > 0 and 177 <= x and x < 177+width and 520 <= y and y < 520+height:
+				self.yamafuda = list(reversed(self.sutefuda))
+				self.misefuda = [n for n in self.misefuda if n.getCard() not in self.sutefuda]
+				self.misefuda.append(Pyramid.Node(None, 0, Card.NONE, 177, 520))
+				self.sutefuda = []
 			return
 		if select.getCard() == Card.NONE:
 			if len(self.sutefuda) > 0:
@@ -706,6 +713,7 @@ class Pyramid(Game):
 			self.sutefuda.insert(0, card)
 			if not self.exist():
 				self.misefuda.remove(select)
+				self.repeat -= 1
 			self.selected = None
 		elif select.getCard().getNumber() == 13:
 			self.rmNode(select)
@@ -735,13 +743,24 @@ class Pyramid(Game):
 			text = font.render("Congratulations!!", True, (0, 0, 0))
 			self.blit(text, 150, 350)
 			return
+			
 		for node in self.bafuda:
 			self.blit(Card.NONE.getImage(0), node.left, node.top)
+
+		existNone = False
 		for node in self.misefuda:
+			if node.getCard() == Card.NONE:
+				existNone = True
 			self.blit(node.getCard().getImage(0), node.left, node.top)
 			if node == self.selected:
 				self.drawRect((255, 0, 0), Rect(node.left, node.top, node.right-node.left, node.bottom-node.top), 1)
-	  
+		if not existNone and self.repeat > 0:
+			width, height = Card.Dimensions(0)
+			self.drawRect((0, 0, 0), Rect(177, 520, width, height), 1)
+			font = pygame.font.SysFont(None, 144)
+			text = font.render(str(self.repeat), True, (128, 128, 128))
+			self.blit(text, 192, 535)
+				
 class Couple(Game):
 	"""
 		カップルクラス（ゲームクラスを継承）
