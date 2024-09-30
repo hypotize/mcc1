@@ -28,10 +28,10 @@ class Button:
 		if self.button.collidepoint(event.pos):
 			self.button.top += 2
 			self.command()
-	def draw(self, screen):
-		pygame.draw.rect(screen, self.color, self.button)
-		pygame.draw.rect(screen, (0, 0, 0), self.button, 1)
-		screen.blit(self.text, (self.x + (self.button.width - self.text.get_width()) / 2, self.y + (self.button.height - self.text.get_height()) / 2))
+	def draw(self, screen, dy):
+		pygame.draw.rect(screen, self.color, self.button.move(0, -dy))
+		pygame.draw.rect(screen, (0, 0, 0), self.button.move(0, -dy), 1)
+		screen.blit(self.text, (self.x + (self.button.width - self.text.get_width()) / 2, self.y - dy + (self.button.height - self.text.get_height()) / 2))
 
 class Game:
 	"""
@@ -55,6 +55,8 @@ class Game:
 		None.
 
 		"""
+		self.dy = 0
+		self.saveScreen = None
 		self.game = None
 		pygame.display.set_caption(title)
 		self.screen = pygame.display.set_mode((width, height))
@@ -167,6 +169,22 @@ class Game:
 		"""
 		self.click(event.pos[0], event.pos[1]-40)
 		self.paint()
+		
+	def keydown(self, event):
+		"""
+		キーボード押下時のイベント処理関数
+
+		Parameters
+		----------
+		event : TYPE
+			DESCRIPTION.
+
+		Returns
+		-------
+		None.
+
+		"""
+		pass
 	
 	def play(self):
 		clock = pygame.time.Clock()
@@ -180,12 +198,27 @@ class Game:
 					self.mouse(event)
 					for button in self.button:
 						button.update(event)
-			for button in self.button:
-				button.draw(self.screen)
+				if event.type == KEYDOWN:
+					self.keydown(event)
 			self.paint()
 			if self.game != None:
 				return self.game
+			for button in self.button:
+				button.draw(self.screen, self.dy)
+			self.scroll()
 			pygame.display.update()
+			self.restore()
+			
+	def scroll(self):
+		if self.dy < 0:
+			width, height = self.screen.get_size()
+			self.saveScreen = self.screen.copy()
+			self.screen.fill((255, 255, 255))
+			self.screen.blit(self.saveScreen, (0, self.dy), (0, 0, width, height-self.dy))
+			
+	def restore(self):
+		if self.dy < 0:
+			self.screen.blit(self.saveScreen, (0, 0))
 			
 	def blit(self, screen, x, y):
 		self.screen.blit(screen, (x, y+40))
@@ -777,7 +810,7 @@ class Couple(Game):
 		None.
 
 		"""
-		super(Couple, self).__init__("Couple", 375, 1000)
+		super(Couple, self).__init__("Couple", 375, 1280)
 	def init(self):
 		"""
 		ゲームの初期化
@@ -791,6 +824,27 @@ class Couple(Game):
 		self.bafuda = []
 		self.select = -1
 		self.message = None
+		self.dy = 0
+	def keydown(self, event):
+		"""
+		キーボード押下時のイベント処理関数
+
+		Parameters
+		----------
+		event : TYPE
+			DESCRIPTION.
+
+		Returns
+		-------
+		None.
+
+		"""
+		if event.key == K_UP:
+			self.dy -= 10
+		elif event.key == K_DOWN:
+			if self.dy < 0:
+				self.dy += 10
+			
 	def click(self, x, y):
 		"""
 		マウスクリック時の処理関数
@@ -807,7 +861,8 @@ class Couple(Game):
 		None.
 
 		"""
-		if self.exist() and x >= 280 and x < 341 and y >= 10 and y < 100:
+		y -= self.dy
+		if self.exist() and x >= 280 and x < 341 and y+self.dy >= 10 and y+self.dy < 100:
 			self.select = -1
 			card = self.pop()
 			self.bafuda.append(card)
@@ -857,7 +912,7 @@ class Couple(Game):
 
 		"""
 		if self.exist():
-			self.blit(Card.NONE.getImage(1), 280, 10)
+			self.blit(Card.NONE.getImage(1), 280, 10-self.dy)
 		for i in range(len(self.bafuda)):
 			y = (i // 4) * 90 + 10
 			x = (i % 4) * 61 + 20
@@ -1019,6 +1074,7 @@ class MasterFrame(Game):
 
 		"""
 		self.game = None
+		self.dy = 0
 		pygame.display.set_caption("menu")
 		self.screen = pygame.display.set_mode((450, 375))
 		self.button = []
