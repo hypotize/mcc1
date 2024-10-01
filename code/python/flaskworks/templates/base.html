@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post" action="/send">
+            {% block question %}
+            {% endblock %}
+        <input type="submit" value="解答">
+    </form>
+    {% block answer %}
+    {% endblock %}
+</body>
+</html>
+

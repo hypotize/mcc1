@@ -1,0 +1,26 @@
+{%extends "base.html" %}
+{% block question %}
+    <table>
+    {% for item in items %}
+		<tr>
+        <th>{{ item.question }} </th>
+        {% for choice in item.choices %}
+            <td><input type='radio' name='{{ item.id }}' value='{{ choice }}' {% if item.selected == choice %}checked{% endif %}>{{ choice }}</td>
+        {% endfor %}
+        <td>
+		{% if item.result == 1 %}
+			正解
+		{% elif item.result == -1 %}
+			不正解
+        {% elif item.result == -2 %}
+            未入力
+		{% endif %}
+        </td>
+		</tr>
+    {% endfor %}
+    </table>
+{% endblock %}
+{% block answer %}
+	{{ answer }}
+{% endblock %}
+
