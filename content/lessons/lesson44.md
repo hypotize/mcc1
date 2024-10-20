@@ -52,3 +52,5 @@ https://scratch.mit.edu/projects/1083944247/editor
 ・1から12のすうじをかく
 
 ・いまなんびょうかわかるようにすうじをかく
+
+https://scratch.mit.edu/projects/1083945671/editor
