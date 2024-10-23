@@ -126,7 +126,7 @@ https://docs.google.com/spreadsheets/d/1P-UeoUx9aBdpoT4DQQ8-Ll4jiSKvPiMba2hLXMKY
 
 コピーしたときに列が`=A2*B1` → `=B2*C1 =C2*D1 =D2*E1 =E2*F1`と**変化**したためです。
 
-#### どうすうればよいのか
+#### どうすればよいのか
 
 つまり、`=A2*B1`の`A`の部分は**変化してはいけない**のです。固定でなければいけません。
 
@@ -171,7 +171,7 @@ https://docs.google.com/spreadsheets/d/1P-UeoUx9aBdpoT4DQQ8-Ll4jiSKvPiMba2hLXMKY
 
 固定しなければいけないのは`1`の部分です。
 
-#### どうすうればよいのか
+#### どうすればよいのか
 
 それでは、**行を固定**します。
 

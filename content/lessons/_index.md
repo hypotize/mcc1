@@ -9,7 +9,6 @@ keywords = ["三浦" ,"コンピュータ", "クラブ", "パソコン", "プロ
 description = ""
 type = "List"
 layout = "List"
-kind = "List"
 
 showFullContent = true
 readingTime = false
