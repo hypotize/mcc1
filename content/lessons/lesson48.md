@@ -24,6 +24,20 @@ https://docs.google.com/spreadsheets/d/11h3Hq3J5kigDldEDeePj6wCKzmcdXrK9JFjphwM6
 ファイルをコピーし、「問題」のシートの問題を解きましょう。
 
 「解答例」のシートに解答例があるので、問題を解き終えたら確認しましょう。
-解答例ではセルの書式を変更している場合がありますので、解答例に合わせてセルの書式を変更してみましょう。
 
+## スプレッドシート練習問題６
+- 基本的な関数の様々な費用例（応用編）
+
+　- ROUNDUP - 数値を指定された桁数に切り上げます。
+　- ROUNDDOWN - 数値を指定された桁数で切り捨てます。
+　- ROUND - 数値を四捨五入して指定された桁数にします。
+　- MIN - 一連の引数のうち、最小の数値を返します。
+　
+### 練習問題
+
+https://docs.google.com/spreadsheets/d/1Ki7hCrTTd2K5_xxZ8f34TXcMPFF0kUTJfsWMH_FwphM/edit?usp=sharing
+
+ファイルをコピーし、「問題」のシートの問題を解きましょう。
+
+「解答例」のシートに解答例があるので、問題を解き終えたら確認しましょう。
 
