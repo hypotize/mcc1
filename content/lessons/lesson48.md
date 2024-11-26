@@ -56,3 +56,25 @@ https://docs.google.com/spreadsheets/d/1RWN9EIBGeVapJdlvsF6BdNZDG5Wzz5PUKjJZWFjZ
 ファイルをコピーし、「問題」のシートの問題を解きましょう。
 
 「解答例」のシートに解答例があるので、問題を解き終えたら確認しましょう。
+
+## スプレッドシート練習問題８
+- 日付と時刻の関数
+
+	- NOW - 現在の日時を取得
+	- TODAY - 現代の日付を取得
+	- YEAR - 日付から年を取り出す
+	- MONTH - 日付から月を取り出す
+	- DAY - 日付から日を取り出す
+	- HOUR - 日時から時を取り出す
+	- MINUTE - 日時から分を取り出す
+	- SECOND - 日時から秒を取り出す
+	- DATE - 指定された値に対応する日付を返す
+	
+### 練習問題
+
+https://docs.google.com/spreadsheets/d/1NHf9bDZ9HE2t2zZ4oDDhVLD1Sopr1lWbsY7szF51IJo/edit?usp=sharing
+
+ファイルをコピーし、「問題」のシートの問題を解きましょう。
+
+「解答例」のシートに解答例があるので、問題を解き終えたら確認しましょう。
+
