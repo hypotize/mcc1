@@ -2,12 +2,12 @@
 title = "レッスン63"
 date = "2025-04-24T16:00:00+09:00"
 author = "橋本　吉生"
-description = "論理クイズ"
+description = "クイズ"
 showFullContent = false
 readingTime = false
 tags = ["クイズ"]
 +++
-# 論理クイズ
+# クイズ
 
 # もんだい
 
