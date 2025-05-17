@@ -1,0 +1,112 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+    font-family: 'Arial', sans-serif;
+}
+
+#game-window {
+    background-color: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 90%;
+    max-width: 600px;
+}
+
+#question-area {
+    margin-bottom: 20px;
+    min-height: 3em; /* 問題文表示エリアの高さを確保 */
+}
+
+#question-text {
+    font-size: 1.8em;
+    color: #333;
+    font-weight: bold;
+}
+
+#image-selection-area {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 20px;
+    min-height: 170px; /* 画像表示エリアの高さを確保 */
+}
+
+.choice-image {
+    width: 150px;
+    height: 150px;
+    object-fit: contain; /* 画像のアスペクト比を保ちつつ、枠内に収める */
+    border: 3px solid transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+    background-color: #eee; /* 画像が読み込まれるまでのプレースホルダー色 */
+}
+
+.choice-image:hover {
+    transform: scale(1.05);
+    border-color: #007bff;
+}
+
+#result-display-area {
+    height: 60px; /* 結果表示エリアの高さ */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#result-feedback div {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.correct-answer-feedback {
+    background-color: #28a745; /* 緑 */
+}
+
+.incorrect-answer-feedback {
+    position: relative;
+    background-color: transparent; /* バツ印なので背景色は不要 */
+}
+
+.incorrect-answer-feedback::before,
+.incorrect-answer-feedback::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 80%; /* バツ印の線の長さ */
+    height: 6px;  /* バツ印の線の太さ */
+    background-color: #dc3545; /* 赤 */
+    border-radius: 3px;
+}
+
+.incorrect-answer-feedback::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.incorrect-answer-feedback::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+
+#finish-message-area {
+    min-height: 2em; /* メッセージ表示エリアの高さを確保 */
+}
+
+#finish-message {
+    font-size: 1.5em;
+    color: #555;
+}
+
+/* 初期非表示用 */
+.hidden {
+    display: none !important;
+}
