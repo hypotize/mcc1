@@ -2,7 +2,7 @@
 title = "レッスン67"
 date = "2025-05-29T15:00:00+09:00"
 author = "橋本　吉生"
-description = "スクラッチで音当てゲームをつくる"
+description = "スクラッチでおとあてゲームをつくる"
 showFullContent = false
 readingTime = false
 tags = ["スクラッチ", "ゲーム"]
