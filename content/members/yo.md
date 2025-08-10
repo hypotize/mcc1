@@ -8,7 +8,7 @@ showFullContent = true
 readingTime = false
 +++
 
-![自分の写真](/images/mcc_stickman.png)
+![自分の写真](/images/mcc_yo.png)
 
 |重要情報|
 |----|----|
