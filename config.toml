@@ -112,9 +112,9 @@ paginate = 5
       url = "/media"
       weight = 9      
     [[menu.main]]
-      identifier = "i"
-      name = "パソコン寄附のお願い"
-      url = "/donate"
+      identifier = "j"
+      name = "INSTAGRAM"
+      url = "https://www.instagram.com/miuracomputerclub"
       weight = 10      
 
 [markup.goldmark.renderer]
