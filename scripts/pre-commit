@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Git pre-commit hook: regenerate history if home.md is being committed.
+# Install: ln -sf ../../scripts/pre-commit .git/hooks/pre-commit
+
+if git diff --cached --name-only | grep -q "content/posts/home.md"; then
+    echo "home.md changed — updating 開催歴..."
+    python3 "$(git rev-parse --show-toplevel)/scripts/update_history.py"
+    git add content/history/_index.md
+fi
