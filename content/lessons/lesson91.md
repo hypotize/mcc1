@@ -48,13 +48,17 @@ tags = ["Scratch", "ゲーム", "初級"]
 
 - 「x座標を（0）、ｙ座標を（0）にする」
 
-- 「（0）度に向ける」
-
 - 「ずっと」
   
   - 「（0.2）秒待つ」
   
   - 「（20）歩動かす」
+
+<!-- -->
+<details><summary>Scratchコード</summary>
+
+<img width="250" src="/images/lesson91_01.png" />
+</details>
 
 ここまで作ったら、右上を画面で「緑の旗」を押して実行してみましょう。
 
@@ -78,6 +82,12 @@ tags = ["Scratch", "ゲーム", "初級"]
 
 - 「（-90）度に向ける」
 
+<!-- -->
+<details><summary>Scratchコード</summary>
+
+<img width="250" src="/images/lesson91_02.png" />
+</details>
+
 この４つを追加したら、右上を画面で「緑の旗」を押して実行してみましょう。
 
 矢印キーを押すと押した方向に緑色の円が動くようになります。
@@ -90,6 +100,12 @@ tags = ["Scratch", "ゲーム", "初級"]
 
 - 「（自分自身）のクローンを作る」を追加します。
 
+<!-- -->
+<details><summary>Scratchコード</summary>
+
+<img width="250" src="/images/lesson91_03.png" />
+</details>
+
 右上を画面で「緑の旗」を押して実行してみましょう。
 
 へびがどんどん伸びていきます。
@@ -101,6 +117,12 @@ tags = ["Scratch", "ゲーム", "初級"]
 - 「（1）秒待つ」
 
 - 「このクローンを削除する」
+
+<!-- -->
+<details><summary>Scratchコード</summary>
+
+<img width="150" src="/images/lesson91_04.png" />
+</details>
 
 右上を画面で「緑の旗」を押して実行してみましょう。
 
@@ -123,6 +145,12 @@ tags = ["Scratch", "ゲーム", "初級"]
   - 「[ゲーム終了]を送る」（「[メッセージ]を送る」の新しいメッセージを「ゲーム終了」にします）
   
   - 「[このスクリプトを止める]」
+  
+<!-- -->
+<details><summary>Scratchコード</summary>
+
+<img width="250" src="/images/lesson91_05.png" />
+</details>
 
 - 画面右下の「ステージ」を選択する
 
@@ -135,6 +163,12 @@ tags = ["Scratch", "ゲーム", "初級"]
 - 「終わるまで（Lose）の音を鳴らす」
 
 - 「すべてを止まる」
+
+<!-- -->
+<details><summary>Scratchコード</summary>
+
+<img width="250" src="/images/lesson91_06.png" />
+</details>
 
 これで、へびが端に着いたらゲーム終了音が鳴って、ゲームが終了するようになりました。
 
@@ -162,6 +196,12 @@ tags = ["Scratch", "ゲーム", "初級"]
 
 - 「移動」
 
+<!-- -->
+<details><summary>Scratchコード</summary>
+
+<img width="650" src="/images/lesson91_07.png" />
+</details>
+
 これで、緑の旗を押すと、いろいろな場所にりんごが現れるようになります。
 
 ## ステップ６　へびがりんごを食べると点数が増え、りんごが別の場所に移動する
@@ -181,6 +221,12 @@ tags = ["Scratch", "ゲーム", "初級"]
 - 「もし＜（りんご）に触れた＞なら」
   
   - 「[りんごを取った]を送る」（「[メッセージ]を送る」の新しいメッセージを「りんごを取った」にします）
+  
+<!-- -->
+<details><summary>Scratchコード</summary>
+
+<img width="250" src="/images/lesson91_08.png" />
+</details>
 
 - 「りんご」の「コード」を選択する
 
@@ -191,6 +237,12 @@ tags = ["Scratch", "ゲーム", "初級"]
 - 「[点数]を（１）ずつ変える」
 
 - 「音」でCoinの音を追加し、「（Coin）の音を鳴らす」
+
+<!-- -->
+<details><summary>Scratchコード</summary>
+
+<img width="250" src="/images/lesson91_09.png" />
+</details>
 
 これで、へびがりんごを食べると点数が増え、りんごが別の場所に移動するようになりました。
 
@@ -208,6 +260,12 @@ tags = ["Scratch", "ゲーム", "初級"]
 
 - 「（点数）秒待つ」を追加する
 
+<!-- -->
+<details><summary>Scratchコード</summary>
+
+<img width="250" src="/images/lesson91_10.png" />
+</details>
+
 これによって、へびがりんごを食べるとへびのからだ（青色）が伸びていきます。
 
 ## ステップ８　へびが自分のからだに触れてもゲームオーバーにする
@@ -219,5 +277,31 @@ tags = ["Scratch", "ゲーム", "初級"]
 - 「もし＜（りんご）に触れた＞なら」を「もし＜＜（りんご）に触れた＞または＜（青）色に触れた＞＞なら」に変更する
   
   「青」の部分はスネークのコスチュームを「からだ」に変更して右上の画面に表示させ、「色に触れた」の色の部分をクリックし、一番下のスポイトを選択して、右上の画面の中の「からだ」の色を選択します。
+  
+<!-- -->
+<details><summary>Scratchコード</summary>
+
+<img width="350" src="/images/lesson91_11.png" />
+</details>
 
 これでスネークゲームの完成です。
+
+## 完成したScratchコード
+
+<!-- -->
+<details><summary>スネークのコード</summary>
+
+<img width="350" src="/images/lesson91_12.png" />
+</details>
+
+<!-- -->
+<details><summary>りんごのコード</summary>
+
+<img width="550" src="/images/lesson91_13.png" />
+</details>
+
+<!-- -->
+<details><summary>ステージのコード</summary>
+
+<img width="200" src="/images/lesson91_14.png" />
+</details>
