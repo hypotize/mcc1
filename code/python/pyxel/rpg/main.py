@@ -669,6 +669,7 @@ class Fighter:
 class App:
 	def __init__(self, level=1):
 		pyxel.init(128, 128)
+		pyxel.mouse(True)
 		pyxel.load("./my_resource.pyxres")
 		self.player_pos = [16, 16]
 		self.message = None
@@ -771,4 +772,4 @@ class App:
 				pyxel.text(128 - l + 4, self.message_y + 2 + i * 10, text, pyxel.COLOR_WHITE)
 				i += 1
 
-App()
+App(3)
