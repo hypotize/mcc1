@@ -772,4 +772,4 @@ class App:
 				pyxel.text(128 - l + 4, self.message_y + 2 + i * 10, text, pyxel.COLOR_WHITE)
 				i += 1
 
-App(3)
+App()
