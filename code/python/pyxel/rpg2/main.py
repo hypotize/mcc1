@@ -121,7 +121,8 @@ class Main(game.Game):
 						elif self.level == 9:
 							App.set_game(concentration.Concentration())
 						else:
-							App.set_game(None)
+							self.message = ["Do you play game?", "> 1"]
+							self.answer = 1
 					else:
 						self.message = ["Do you play game?", "> 1"]
 						self.answer = 1
