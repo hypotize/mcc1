@@ -98,6 +98,8 @@ class Puzzle15(game.Game):
 				self.start = True
 			if pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT):
 				x, y = pyxel.mouse_x // 32, pyxel.mouse_y // 32
+				if x < 0 or x > 3 or y < 0 or y > 3:
+					return None
 				if not self.tiles[y][x].isMovable:
 					return None
 				ex, ey = self.empty
