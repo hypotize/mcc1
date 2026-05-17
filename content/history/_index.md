@@ -110,6 +110,7 @@ Sessions marked with * are **estimated** (pre-table era: described as "every Sun
 | 2月 | 1日, 8日, 22日 | 3 |
 | 3月 | 1日, 8日, 22日, 29日 | 4 |
 | 4月 | 5日, 12日, 19日, 26日 | 4 |
+| 5月 | 10日, 17日 | 2 |
 
 ---
 
