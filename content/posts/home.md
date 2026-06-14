@@ -4,7 +4,7 @@ date = "2022-03-27T16:30:59+09:00"
 author = "Michael Cashen"
 authorTwitter = "michaelcashen" #do not include @
 cover = ""
-tags = ["三浦", "コンピュータ", "クラブ", "やるぞ！", "2024年もやるぞ！"]
+tags = ["三浦", "コンピュータ", "クラブ", "やるぞ！"]
 keywords = ["三浦" ,"コンピュータ", "クラブ", "パソコン", "プログラミング"]
 description = "三浦コンピュータクラブの概要"
 
