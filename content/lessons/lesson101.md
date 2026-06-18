@@ -10,7 +10,7 @@ tags = ["初級", "ホームページ", "ゲーム", "プログラミング"]
 
 # いろんなサイトで遊んでみよう
 
-## ゲーム・その他
+## ゲーム
 - Ri-li
 
 [https://ri-li.sourceforge.net/](https://ri-li.sourceforge.net/)
@@ -35,40 +35,17 @@ tags = ["初級", "ホームページ", "ゲーム", "プログラミング"]
 画面に表示される数字の位置を1から順番に憶えてクリックするゲーム。
 結構難しい。
 
-- Koalas to the Max dot Com
-
-[https://www.koalastothemax.com/](https://www.koalastothemax.com/)
-
-画面の丸にマウスカーソルを合わせて丸をどんどん分割されていくだけのもの。
-進めていくと背後に絵が出てくる。
-結構イライラする。
-
-- Zoomquilt2
-
-[https://zoomquilt2.com/#google_vignette](https://zoomquilt2.com/#google_vignette)
-
-画面をながめるだけ。
-画面の絵の中心がいくらでも拡大されていくらしい。
-究極の暇つぶし、でも、何かすごい。
-
-- 世界のウェブカメラ
-
-[https://webcamera24.com/ja/](https://webcamera24.com/ja/)
-
-世界中のウェブカメラのライブ映像が見られる。
-
 - スクラッチでスイカゲームを作る動画
 
 [https://www.youtube.com/watch?v=IpT0-zUGtQw](https://www.youtube.com/watch?v=IpT0-zUGtQw)
 
 それほど難しくなくて、見た目はおもしろい。
 
-- GIMPで壁紙画像を作る
+- newdoku
 
-[https://www.youtube.com/watch?v=HqwtWtDkMMY](https://www.youtube.com/watch?v=HqwtWtDkMMY)
+[https://newdoku.com/include/online.php?lang=ja](https://newdoku.com/include/online.php?lang=ja)
 
-まあまあ簡単で、いろいろ選択肢も広い。
-
+数独の変形。難易度をいろいろ変えられる。
 
 ## プログラミング
 
@@ -123,3 +100,43 @@ tags = ["初級", "ホームページ", "ゲーム", "プログラミング"]
 小学生には少し難しい。
 言語は限定していない。
 正解を出さないと解説が読めない
+
+- アルゴロジック
+
+[プログラミング体験ゲーム：アルゴロジック　｜　JEITA](https://algo.jeita.or.jp/)
+
+## その他
+
+- GIMPで壁紙画像を作る
+
+[https://www.youtube.com/watch?v=HqwtWtDkMMY](https://www.youtube.com/watch?v=HqwtWtDkMMY)
+
+まあまあ簡単で、いろいろ選択肢も広い。
+
+- 世界のウェブカメラ
+
+[https://webcamera24.com/ja/](https://webcamera24.com/ja/)
+
+世界中のウェブカメラのライブ映像が見られる。
+
+- Koalas to the Max dot Com
+
+[https://www.koalastothemax.com/](https://www.koalastothemax.com/)
+
+画面の丸にマウスカーソルを合わせて丸をどんどん分割されていくだけのもの。
+進めていくと背後に絵が出てくる。
+結構イライラする。
+
+- Zoomquilt2
+
+[https://zoomquilt2.com/#google_vignette](https://zoomquilt2.com/#google_vignette)
+
+画面をながめるだけ。
+画面の絵の中心がいくらでも拡大されていくらしい。
+究極の暇つぶし、でも、何かすごい。
+
+- 音声合成
+
+[https://voicevox.su-shiki.com/](https://voicevox.su-shiki.com/)
+
+
