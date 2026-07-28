@@ -286,7 +286,7 @@ for mondai in mondai_list:
 「ただしい こたえ」の もじを バラバラに シャッフルして、もんだいを じどうで つくろう。
 
 ```python
-import random  # シャッフルする つ道具を よびだす
+import random  # シャッフルする どうぐを よびだす
 
 print("いいまちがいクイズ")
 print("わたしが、まちがったことばをいうので、ただしいことばを、こたえてください。")
@@ -326,8 +326,8 @@ for kotae in kotae_list:
 こたえが でたあとに 2びょう まつようにして、がめんを 見やすくしよう。
 
 ```python
-import random  # シャッフルする つ道具
-import time    # じかんを まつ つ道具
+import random  # シャッフルする どうぐを よびだす
+import time    # じかんをまつ どうぐを よびだす
 
 print("いいまちがいクイズ")
 print("わたしが、まちがったことばをいうので、ただしいことばを、こたえてください。")
@@ -372,3 +372,45 @@ kotae_list = ["オムライス", "アルゼンチン", "けんびきょう"]
 
 kotae_list = ["ちょうほうけい", "すいじょうき", "とどうふけん", "がっしょうコンクール", "せいりせいとん", "どんぐりのせいくらべ"]
 
+---
+
+## ステップ13：もんだいを だすじゅんばんを かえる
+
+まいかい もんだいが でるじゅんばんが かわるようにしよう。
+
+```python
+import random  # シャッフルする どうぐをよびだす
+import time    # じかんをまつ どうぐをよびだす
+
+print("いいまちがいクイズ")
+print("わたしが、まちがったことばをいうので、ただしいことばを、こたえてください。")
+print()
+
+kotae_list = ["ちょうほうけい", "すいじょうき", "とどうふけん", "がっしょうコンクール", "せいりせいとん", "どんぐりのせいくらべ"]
+
+# もんだいのじゅんばんをかえる
+random.shuffle(kotae_list)
+
+bangou = 1
+
+for kotae in kotae_list:
+    nagasa = len(kotae)
+    # 問題の文字をバラバラにする
+    moji_list = random.sample(kotae, nagasa)
+    mondai = "".join(moji_list)
+    
+    print("もんだい" + str(bangou) + "：" + mondai)
+    nyuuryoku = input("こたえを いれてね：")
+    
+    if nyuuryoku == kotae:
+        print("せいかい！")
+    else:
+        print("ちがいます")
+        print("ただしい こたえは 「" + kotae + "」 でした")
+    
+    print()
+    
+    # 2びょう まつ
+    time.sleep(2)
+    
+    bangou = bangou + 1
