@@ -409,13 +409,85 @@ A = 10, B = 11, C = 12, D = 13, E = 14, F = 15
 Pythonで10進数を2進数に変換するプログラムを作ってください。数値を入力して、2進数の値を0か1の文字列にして、print関数で出力してください。
 Pythonには10進数を2進数に変換する便利な関数が用意されていますが、それを使わず、「割り算を使った変換方法」か「の累乗を使った変換方法」でプログラムを作成してください。
 
+<details><summary>回答例</summary>
+
+```python
+def dec2bin(x):
+	s = ""
+	while True:
+		s = ("0" if x % 2 == 0 else "1") + s
+		x //= 2
+		if x == 0:
+			break
+	return s
+	
+x = int(input())
+print(dec2bin(x))
+
+```
+
+</details>
+
 ### 課題２
 
 Pythonで2進数の文字列を入力して、10進数の数値に変換してprint関数で出力してください。
 Pythonには2進数を10進数に変換する便利な関数が用意されていますが、それを使わず、「位取り記数法」でプログラムを作成してください。
+
+
+<details><summary>回答例</summary>
+
+```python
+def bin2dec(b):
+	s = reversed(b)
+	x = 0
+	i = 1
+	for c in s:
+		x += int(c) * i
+		i *= 2
+	return x
+	
+b = input()
+print(bin2dec(b))
+
+```
+
+</details>
 
 ### 課題３
 
 Pythonで10進法を16進法に変換するプログラムを作ってください。数値を入力して、16進数の値を0〜Fを使用したの文字列にして、print関数で出力してください。
 また、Pythonで16進数の文字列を入力して、10進数の数値に変換してprint関数で出力してください。
 いずれもPythonで用意された関数は使わないで「割り算を使った変換」や「位取り記数法」でプログラムを作成するか、先程作った2進数・10進数変換プログラムを経由したプログラムを作成してください。
+
+<details><summary>回答例</summary>
+
+```python
+def dec2hex(x):
+	s = ""
+	while True:
+		s = "0123456789ABCDEF"[x%16] + s
+		x //= 16
+		if x == 0:
+			break
+	return s
+	
+x = int(input())
+print(dec2hex(x))
+
+```
+
+```python
+def hex2dec(b):
+	s = reversed(b)
+	x = 0
+	i = 1
+	for c in s:
+		x += "0123456789ABCDEF".index(c) * i
+		i *= 16
+	return x
+	
+b = input()
+print(hex2dec(b))
+```
+
+</details>
