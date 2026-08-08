@@ -17,7 +17,7 @@ tags = ["ゲーム", "2進数", "HTML", "CSS", "JavaScript"]
 
 2進数が分かったら、ゲームを使って2進数を覚えましょう。
 
-[2進数学習ゲーム](/lessons/2進数学習ゲーム.html)
+[2進数学習ゲーム](binary-game.html)
 
 ---
 
@@ -104,4 +104,4 @@ tags = ["ゲーム", "2進数", "HTML", "CSS", "JavaScript"]
 
 ## 5. ゲームを使って2進数を覚えましょう。
 
-[2進数学習ゲーム](/lessons/2進数学習ゲーム.html)
+[2進数学習ゲーム](binary-game.html)
