@@ -1,1 +1,393 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2進数学習ゲーム - トグル入力版</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
 
+    .card {
+      background: white;
+      padding: 40px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      color: #333;
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #666;
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    .question-box {
+      font-size: 4rem;
+      font-weight: bold;
+      color: #007bff;
+      margin: 10px 0 20px;
+      line-height: 1;
+    }
+
+    /* トグルボタンを横に並べるコンテナ */
+    .bits-container {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    /* ビットと重み（8, 4, 2, 1）のセット */
+    .bit-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .bit-weight {
+      font-size: 0.85rem;
+      color: #666;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    /* 各ビット（トグルボタン）のデザイン */
+    .bit-btn {
+      width: 60px;
+      height: 60px;
+      font-size: 1.8rem;
+      font-weight: bold;
+      background-color: #e9ecef;
+      color: #495057;
+      border: 2px solid #ced4da;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    /* ボタンホバー時 */
+    .bit-btn:hover {
+      background-color: #dee2e6;
+    }
+
+    /* トグルON（1の時）のスタイル */
+    .bit-btn.active {
+      background-color: #28a745;
+      color: white;
+      border-color: #28a745;
+      box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+      transform: translateY(-2px);
+    }
+
+    /* 現在の入力状況を表示するエリア */
+    .current-value-box {
+      background-color: #e9ecef;
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      font-size: 1.3rem;
+      color: #495057;
+    }
+
+    .current-value-box strong {
+      color: #007bff;
+      font-size: 1.6rem;
+    }
+
+    .submit-btn {
+      font-size: 1.1rem;
+      font-weight: bold;
+      padding: 12px 30px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.2s, transform 0.1s;
+    }
+
+    .submit-btn:hover {
+      background-color: #0056b3;
+    }
+
+    .submit-btn:active {
+      transform: scale(0.98);
+    }
+
+    .start-btn {
+      font-size: 1.2rem;
+      font-weight: bold;
+      padding: 14px 30px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 15px;
+      transition: background-color 0.2s, transform 0.1s;
+      box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+    }
+
+    .start-btn:hover {
+      background-color: #218838;
+    }
+
+    .start-btn:active {
+      transform: scale(0.98);
+    }
+
+    .restart-btn {
+      font-size: 1.1rem;
+      font-weight: bold;
+      padding: 12px 30px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 15px;
+      transition: background-color 0.2s, transform 0.1s;
+    }
+
+    .restart-btn:hover {
+      background-color: #218838;
+    }
+
+    /* 結果表示エリア */
+    .result {
+      font-size: 1.2rem;
+      font-weight: bold;
+      min-height: 1.5em;
+      margin-top: 15px;
+    }
+
+    .correct {
+      color: #28a745;
+    }
+
+    .incorrect {
+      color: #dc3545;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>2進数学習ゲーム</h1>
+    <p id="sub-title">10進数を4桁の2進数に変換しよう</p>
+
+    <!-- ゲームスタートボタン -->
+    <button class="start-btn" id="start-btn">ゲームスタート</button>
+
+    <div id="status-bar" style="display: none; justify-content: space-between; align-items: center; margin-bottom: 10px; font-weight: bold; color: #007bff;">
+      <span id="progress">第 1 / 15 問</span>
+      <span id="timer-display">タイム: 0.0 秒</span>
+    </div>
+
+    <!-- 問題表示 -->
+    <div id="game-area" style="display: none;">
+      <div class="question-box" id="question">--</div>
+
+      <!-- 4桁の2進数トグルボタン（重みガイド付き） -->
+      <div class="bits-container" id="bits-container">
+        <div class="bit-wrapper">
+          <span class="bit-weight">8の位</span>
+          <button class="bit-btn">0</button>
+        </div>
+        <div class="bit-wrapper">
+          <span class="bit-weight">4の位</span>
+          <button class="bit-btn">0</button>
+        </div>
+        <div class="bit-wrapper">
+          <span class="bit-weight">2の位</span>
+          <button class="bit-btn">0</button>
+        </div>
+        <div class="bit-wrapper">
+          <span class="bit-weight">1の位</span>
+          <button class="bit-btn">0</button>
+        </div>
+      </div>
+
+      <!-- リアルタイム計算表示 -->
+      <div class="current-value-box" id="current-value">
+        現在の入力: <strong>0</strong>
+      </div>
+
+      <button class="submit-btn" id="submit-btn">判定</button>
+    </div>
+
+    <div class="result" id="result"></div>
+    <button class="restart-btn" id="restart-btn" style="display: none;">もう一度遊ぶ</button>
+  </div>
+
+  <script>
+    let questions = [];
+    let currentIndex = 0;
+    let currentNumber = 0;
+    let startTime = null;
+    let timerInterval = null;
+
+    const bitBtns = document.querySelectorAll('.bit-btn');
+    const resultElement = document.getElementById('result');
+    const currentValueElement = document.getElementById('current-value');
+    const submitBtn = document.getElementById('submit-btn');
+    const progressElement = document.getElementById('progress');
+    const timerDisplayElement = document.getElementById('timer-display');
+    const statusBar = document.getElementById('status-bar');
+    const gameArea = document.getElementById('game-area');
+    const restartBtn = document.getElementById('restart-btn');
+    const startBtn = document.getElementById('start-btn');
+
+    // タイマーの開始・リセット
+    function startTimer() {
+      if (timerInterval) clearInterval(timerInterval);
+      startTime = Date.now();
+      timerDisplayElement.style.display = 'inline';
+      
+      timerInterval = setInterval(() => {
+        const elapsed = (Date.now() - startTime) / 1000;
+        timerDisplayElement.textContent = `タイム: ${elapsed.toFixed(1)} 秒`;
+      }, 100);
+    }
+
+    // 1〜15の数値をランダムな順番で準備（フィッシャー–イェーツのシャッフル）
+    function initQuestions() {
+      questions = Array.from({ length: 15 }, (_, i) => i + 1);
+      for (let i = questions.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [questions[i], questions[j]] = [questions[j], questions[i]];
+      }
+      currentIndex = 0;
+      startBtn.style.display = 'none';
+      statusBar.style.display = 'flex';
+      gameArea.style.display = 'block';
+      restartBtn.style.display = 'none';
+      progressElement.style.display = 'inline';
+      
+      startTimer();
+    }
+
+    // 現在の選択状態（10進数）を画面にリアルタイム反映する関数
+    function updateCurrentDisplay() {
+      let binaryStr = '';
+      bitBtns.forEach(btn => {
+        binaryStr += btn.textContent;
+      });
+      
+      // 2進数文字列を10進数数値に変換
+      const decimalVal = parseInt(binaryStr, 2);
+
+      currentValueElement.innerHTML = `現在の入力: <strong>${decimalVal}</strong>`;
+    }
+
+    // トグルボタンのクリックイベントを設定
+    bitBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (btn.textContent === '0') {
+          btn.textContent = '1';
+          btn.classList.add('active');
+        } else {
+          btn.textContent = '0';
+          btn.classList.remove('active');
+        }
+
+        updateCurrentDisplay();
+      });
+    });
+
+    // 次の問題を表示（または終了処理）
+    function nextQuestion() {
+      if (currentIndex >= questions.length) {
+        showGameClear();
+        return;
+      }
+
+      currentNumber = questions[currentIndex];
+      document.getElementById('question').textContent = currentNumber;
+      progressElement.textContent = `第 ${currentIndex + 1} / 15 問`;
+      
+      // 全てのトグルボタンを '0' にリセット
+      bitBtns.forEach(btn => {
+        btn.textContent = '0';
+        btn.classList.remove('active');
+      });
+      
+      updateCurrentDisplay();
+
+      resultElement.textContent = '';
+      resultElement.className = 'result';
+    }
+
+    // 全問題終了時の処理
+    function showGameClear() {
+      if (timerInterval) clearInterval(timerInterval);
+      const totalTime = ((Date.now() - startTime) / 1000).toFixed(1);
+
+      gameArea.style.display = 'none';
+      statusBar.style.display = 'none';
+
+      resultElement.innerHTML = `🎉 全15問クリア！おめでとうございます！<br><div style="font-size: 1.5rem; color: #007bff; margin-top: 15px;">⏱️ クリアタイム: <strong>${totalTime}</strong> 秒</div>`;
+      resultElement.className = 'result correct';
+      restartBtn.style.display = 'block';
+    }
+
+    // 判定処理
+    function checkAnswer() {
+      let userInput = '';
+      bitBtns.forEach(btn => {
+        userInput += btn.textContent;
+      });
+
+      const correctAnswer = currentNumber.toString(2).padStart(4, '0');
+
+      if (userInput === correctAnswer) {
+        resultElement.textContent = '⭕ 正解！';
+        resultElement.className = 'result correct';
+        
+        currentIndex++;
+        // 1秒後に次の問題へ
+        setTimeout(() => {
+          nextQuestion();
+        }, 1000);
+      } else {
+        resultElement.textContent = '❌ 不正解...';
+        resultElement.className = 'result incorrect';
+      }
+    }
+
+    // イベントリスナーの設定
+    submitBtn.addEventListener('click', checkAnswer);
+    startBtn.addEventListener('click', () => {
+      initQuestions();
+      nextQuestion();
+    });
+    restartBtn.addEventListener('click', () => {
+      initQuestions();
+      nextQuestion();
+    });
+
+  </script>
+
+</body>
+</html>
