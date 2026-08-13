@@ -13,6 +13,12 @@ tags = ["クラス", "オブジェクト指向", "Python"]
 レッスン118で習ったクラスを使って、Pythonで簡単なゲームを作ってみましょう。
 最初はとてもシンプルなゲームですが、徐々に機能を追加していきます。
 
+作成するゲームはポケモンバトルゲームです。
+3匹のポケモンが登場し、そのうち2匹が戦います。
+
+必要な「クラス」はPokemonクラスとBattle（戦闘）クラスです。
+Battle（戦闘）クラスはあらかじめ用意してあるので、Pokemonクラスを作成していきます。
+
 ## 作成するクラス
 
 Pokemonクラスを作成してください。
@@ -20,8 +26,14 @@ Pokemonクラスは以下のような仕組みを持っています。
 
 1. コンストラクタ(__init__メソッド）
 
+	```python
+	def __init__(self, name, hp, attack):
+		...
+	```
+	というメソッドを定義します。
+
 	クラスからインスタンス（実体）を作成する時に呼ばれるメソッドを「コンストラクタ」と呼びます。
-	Pythonでは`__init__(self, 引数)`という名前のメソッドが「コンストラクタです」
+	Pythonでは`__init__(self, 引数)`という名前のメソッドが「コンストラクタ」です。
 	
 	以下の引数を設定し、属性(self.XXXXという変数）に設定します。
 	
@@ -29,14 +41,13 @@ Pokemonクラスは以下のような仕組みを持っています。
 		- hp (ポケモンの体力、整数）
 		- attack （ポケモンの攻撃力、整数）
 	
-	コンストラクタとして
+1. take_damageメソッド
+
 	```python
-	def __init__(self, name, hp, attack):
+	def take_damage(self, damage):
 		...
 	```
 	というメソッドを定義します。
-	
-1. take_damageメソッド
 
 	ポケモンがダメージを受けた時に呼ばれて、引数のdamage分、ポケモンのhpを減らします。
 	ただし、hpは0より小さくは（マイナスには）なりません。
@@ -47,30 +58,24 @@ Pokemonクラスは以下のような仕組みを持っています。
 	`{ポケモンの名前} は {ダメージの値} ダメージを受けた！（残りHP: {HPの値}）`
 	
 	print文で表示する文字列の中に変数（属性）の値を入れたい場合は、`f"文字列{変数名}文字列"`のような書き方をします。
-	ポケモンの名前の属性は`self.name`、ダメージの変数は`damge`、HPの値の属性は`self.hp`なので以下のように記述します。
+	ポケモンの名前の属性は`self.name`、ダメージの変数は`damage`、HPの値の属性は`self.hp`なので以下のように記述します。
 	
 	```python
 	print(f"{self.name} は {damage} ダメージを受けた！（残りHP: {self.hp}）")
 	```
 	
-	```python
-	def take_damage(self, damage):
-		...
-	```
-	というメソッドを定義します。
-	
 1. is_faintedメソッド
 
-	ポケモンが戦闘不能（HPが0）かどうかを判定するメソッドです。
-	
-	戻り値（メソッドが返す値）はTrue（戦闘不能）かFalse（戦闘可能）です。
-	
 	```python
 	def is_fainted(self):
 		...
 		return ...
 	```
 	というメソッドを定義します。
+
+	ポケモンが戦闘不能（HPが0）かどうかを判定するメソッドです。
+	
+	戻り値（メソッドが`return`で返す値）はTrue（戦闘不能）かFalse（戦闘可能）です。
 	
 ## 課題１
 
@@ -168,9 +173,7 @@ class Pokemon:
 |水|草|炎|
 |草|炎|水|
 
-
-
-1. Pokemonクラスのコンストラクタの引数に「poke_type」を追加し、ポケモンの属性を追加して設定する
+1. Pokemonクラスのコンストラクタの引数に「poke_type」を追加し、ポケモンの属性も追加して設定する
 
 1. Pokemonクラスに「クラス変数」としてタイプの強みと弱みのテーブル（辞書）type_chartを追加する
 
@@ -184,7 +187,9 @@ class Pokemon:
 		def __init__(self, name, hp, attack, poke_type):
 		...
 	```
-	このように、クラスに直接変数を追加すると、「クラス変数」といって、クラス共通の変数を設定することができ、Pokemon.type_chartで参照することができます。
+	このように、クラスのすぐ下に定義される変数を「クラス変数」と言い、クラス共通で使用する値を設定することができます。
+	クラス変数はPokemon.type_chartのように{クラス名}.{クラス変数名}で参照することができます。
+	
 	自分のポケモンタイプから強み・弱点を取得するには、以下のようにして参照することができます。
 	
 	自分のポケモンタイプの強み： `Pokemon.type_chart[self.poke_type]['強み']`
@@ -205,7 +210,7 @@ class Pokemon:
 
 1. 	take_damage()メソッドを変更する
 
-	引数をダメージ(damage)から相手もポケモン(opponent)に変更し、ダメージ(damage)は相手のポケモンの攻撃力(attack)に設定します。
+	引数をダメージ(damage)から相手のポケモン(opponent)に変更し、ダメージ(damage)は相手のポケモンの攻撃力(attack)に設定します。
 	さらに、ポケモン同士の相性にしたがい、相手のポケモンのタイプが自分の弱点であれば、ダメージ(damage)を1.5倍し、自分の強みであればダメージ(damage)を0.5倍にします。
 	
 これらの変更を行って、プログラムを実行すると以下のようにコンソールに表示されます。
@@ -362,15 +367,15 @@ if __name__ == '__main__':	# メインプログラム
 
 	コンストラクタで受け取るものもattackではなくwazaになります。
 	
-1. take_damageメソッドで、ダメージ(damage)は相手の攻撃力(attack)ではなく、相手の「わざ」(waza)の威力(power)に変更します
+1. take_damageメソッドにおいて、ダメージ(damage)を相手の攻撃力(attack)ではなく、相手の「わざ」(waza)の威力(power)に変更します
 
 	`damage = opponent.waza.power`になります
 	
-1. take_damageメソッドで、ダメージ(damage)の効果に影響するのは相手のタイプ(opponent.poke_type)から相手の「わざ」のタイプに変更します
+1. take_damageメソッドにおいて、ダメージ(damage)の効果に影響するのは相手のタイプ(opponent.poke_type)ではなく、相手の「わざ」のタイプに変更します
 
 	相手の「わざ」のタイプ： `opponent.waza.waza_type`
 	
-1. show_type_advantageメソッドで「わざ」の名前と威力も表示します
+1. show_type_advantageメソッドにおいて、以下のように「わざ」の名前と威力も表示します
 
 	```
 	ヒトカゲ のタイプ: 炎
@@ -379,9 +384,10 @@ if __name__ == '__main__':	# メインプログラム
 	 - わざ: ひのこ 40
 	```
 	
-1. Battleクラスのfightメソッドの中でポケモンの攻撃メッセージに「わざ」の名前と威力も追加します
+1. Battleクラスのfightメソッドにおいて、ポケモンの攻撃メッセージに「わざ」の名前と威力も追加します
 
 	Pokemonクラスのwaza「わざ」も追加し、以下のように表示させます。
+	
 	例：　`ヒトカゲ の攻撃！ ひのこ 40!!`
 
 これらの変更を行って、プログラムを実行すると以下のようにコンソールに表示されます。
@@ -523,7 +529,7 @@ Pokemonクラスを抽象クラスにし、各ポケモンタイプごとに新�
 		...
 	``` 
 
-1. Pokemonクラスからtype_chart変数とポケモンタイプの属性を削除します
+1. Pokemonクラスからtype_chartクラス変数とポケモンタイプの属性を削除します
 
 	```python
 	class Pokemon(ABC):
@@ -547,7 +553,7 @@ Pokemonクラスを抽象クラスにし、各ポケモンタイプごとに新�
 		pass
 	```
 	
-1. take_damageメソッドでdamageを取得する部分をget_damageメソッドから取得するように変更する
+1. take_damageメソッドにおいて、damageを取得する部分を上記のget_damageメソッドから取得するように変更します
 
 	```python
 	def take_damage(self, opponent):
@@ -567,9 +573,9 @@ Pokemonクラスを抽象クラスにし、各ポケモンタイプごとに新�
 		...
 	```
 	
-1. 各クラスにhow_type_advantageメソッドと、get_damageメソッドを追加します
+1. 各クラスにshow_type_advantageメソッドと、get_damageメソッドを追加します
 
-	テーブルを廃止し、各クラスのポケモンタイプに必要な情報だけ記載します。
+	type_charテーブルを削除したので、このテーブルを使わず、各クラスのポケモンタイプに必要な情報だけを記載します。
 	
 	例：Grass_Pokemonクラス
 	
@@ -578,14 +584,14 @@ Pokemonクラスを抽象クラスにし、各ポケモンタイプごとに新�
 	
 		def show_type_advantage(self):
 			print(f"{self.name} のタイプ： 草")
-			print(" - 強み： 草")
-			print(" - 弱点： 水")
+			print(" - 強み： 水")
+			print(" - 弱点： 炎")
 			print(f" - わざ： {self.waza}")
 			
 		def get_damage(self, opponent):
-			if 	opponent.waza.waza_type == "草":
+			if 	opponent.waza.waza_type == "水":	# 草タイプポケモンの強みは水タイプのわざ
 				damage = int(opponent.waza.power * 0.5)
-			elif opponent.waza.waza_type == "水":
+			elif opponent.waza.waza_type == "炎":	# 草タイプポケモンの弱点は炎タイプのわざ
 				damage = int(opponent.waza.power * 1.5)
 			else:
 				damage = opponent.waza.power
@@ -594,9 +600,9 @@ Pokemonクラスを抽象クラスにし、各ポケモンタイプごとに新�
 	
 1. ポケモンを作成する時、ポケモンのタイプに合わせてそれぞれのポケモンタイプクラスから作成するように変更します
 
-	例
+	例：フシギダネポケモンの作成
 	```python
-	charmander = Fire_Pokemon("ヒトカゲ", 100, fire_waza)
+	bulbasaur = Grass_Pokemon("フシギダネ", 100, grass_waza)    # フシギダネポケモンを作成
 	```
 
 Pokemon.pyを修正して、実行してみましょう。
@@ -625,8 +631,9 @@ class Pokemon(ABC):
     @abstractmethod
     def show_type_advantage(self):
         pass
-    
-    def get_gamage(self, opponent):
+
+    @abstractmethod    
+    def get_damage(self, opponent):
         pass
     
     def take_damage(self, opponent):
@@ -655,9 +662,7 @@ class Fire_Pokemon(Pokemon):
             damage = opponent.waza.power
         return damage
     
-class Water_Pokemon(Pokemon):
-    type_chart = {"弱点" : "草", "強み" : "炎"}
-    
+class Water_Pokemon(Pokemon):   
     def show_type_advantage(self):
         print(f"{self.name} のタイプ： 水")
         print(" - 強み： 炎")
@@ -674,8 +679,6 @@ class Water_Pokemon(Pokemon):
         return damage
     
 class Grass_Pokemon(Pokemon):
-    type_chart = {"弱点" : "炎", "強み" : "水"}
-    
     def show_type_advantage(self):
         print(f"{self.name} のタイプ： 草")
         print(" - 強み： 水")
