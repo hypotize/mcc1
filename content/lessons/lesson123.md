@@ -152,13 +152,13 @@ Pythonプログラムを学び始めた方向けの演習ドリルです。
 	
 			昇順（小さい順）にソートした配列を返す
 		
-		- `sorted(配列, reversed=True)`
+		- `sorted(配列, reverse=True)`
 	
 			降順（大きい順）にソートした配列を返す
 		
 	- ランダム
 
-		プログラムの先頭で`import random`を宣言し、`random.ranbint(x, y)`を実行すると、x〜yの数値をランダムに返します。
+		プログラムの先頭で`import random`を宣言し、`random.randint(x, y)`を実行すると、x〜yの数値をランダムに返します。
 	
 	- スリープ
 
