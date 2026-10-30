@@ -155,6 +155,196 @@ Pythonプログラムを学び始めた方向けの演習ドリルです。
 			lbl.configure(text=a)
 		```
 		
+- その他のGUI部品（ウィジェット）
+
+	演習には使われていないGUI部品（ウィジェット）をいくつか紹介します。
+	
+	- チェックボックス
+	
+		- [ ]チェック1
+		- [x]チェック2
+		
+		ウィンドウに上記のようなチェックボックスを追加するには「チェックボタン(Checkbutton)」という部品（ウィジェット）を作成します。
+		
+		引数の`text`にチェックボックスに表示したい文字列を指定して、`tk.Checkbutton()`でチェックボックスを作成し、`checkbox`という変数に設定します。
+		
+		その際、チェックされているか否かの状態を保持する変数`check`を設定し、引数の`variable`に指定します。
+		
+		```python
+		check = tk.BooleanVar()
+		checkbox = tk.CheckBox(text="チェック", variable=check) 
+		```
+		
+		作成したチェックボックスをウィンドウに配置するには`place`メソッドで引数`x`、`y`により位置を指定します。
+		
+		```python
+		checkbox.place(x=100, y=200)
+		```
+		
+		また、ボタンが押された際に、チェックボックスがチェックされているかどうかは変数`check`の`get`メソッドを呼ぶことで取得できます。
+		
+		```python
+		def sub():
+			if check.get():
+				print("チェックされています")
+			else:
+				print("チェックされていません")
+		```
+		
+	- ラジオボタン
+	
+		いくつかの選択肢から１つの値を選ぶラジオボタンをウィンドウに追加するには「ラジオボタン(Radiobutton)」という部品（ウィジェット）を作成します。
+		
+		引数の`text`にラジオボックスに表示したい文字列を指定して、`tk.Radiobutton()`でラジオボックスを作成し、`radiobutton1`という変数に設定します。
+		
+		複数のラジオボックスを作成し、`radiobutton2`、`radiobutton3`などの異なる変数に設定します。
+		
+		その際、どのラジオボタンが選択されているかを保持する共通の変数`radio`を設定し、引数の`variable`に指定します。
+		さらに、選択された際に変数`radio`に設定する値を引数の`value`に指定します。
+		なお、変数`radio`には`set`メソッドで初期値を設定しておきます。
+		
+		```python
+		radio = tk.StringVar()
+		radio.set("選択肢1")
+		
+		radiobutton1 = tk.Radiobutton(text="選択肢1", variable=radio, value="選択肢1")
+		radiobutton2 = tk.Radiobutton(text="選択肢2", variable=radio, value="選択肢2")
+		radiobutton3 = tk.Radiobutton(text="選択肢3", variable=radio, value="選択肢3")
+		```
+		
+		作成したチェックボックスをウィンドウに配置するには`place`メソッドで引数`x`、`y`により位置を指定します。
+		
+		```python
+		radiobutton1.place(x=100, y=200)
+		radiobutton2.place(x=100, y=220)
+		radiobutton3.place(x=100, y=240)
+		```
+		
+		上記のようにラジオボタンを個別にウィンドウを配置することもできますが、以下のようにラジオボタンをまとめてフレーム(Frame)部品（ウィジェット）にまとめて格納し、このフレームをウィンドウに配置する方が一般的です。
+		
+		```python
+		radioframe = tk.Frame()
+		
+		radio = tk.StringVar()
+		radio.set("選択肢1")
+		
+		radiobutton1 = tk.Radiobutton(radioframe, text="選択肢1", variable=radio, value="選択肢1")
+		radiobutton2 = tk.Radiobutton(radioframe, text="選択肢2", variable=radio, value="選択肢2")
+		radiobutton3 = tk.Radiobutton(radioframe, text="選択肢3", variable=radio, value="選択肢3")
+		
+		radiobutton1.pack()
+		radiobutton2.pack()
+		radiobutton3.pack()
+		
+		radioframe.place(x=100, y=200)
+		```	
+		
+		さらに以下のようにフレーム(Frame)部品（ウィジェット）の代わりにラベルフレーム(LabelFrame)部品（ウィジェット）を使用し、`txt`引数に文字列を指定すると、まとめたラジオボタンの名称を表示させることができます。
+		
+		```python
+		radioframe = tk.LabelFrame(text="選択肢一覧")
+		
+		radio = tk.StringVar()
+		radio.set("選択肢1")
+		
+		radiobutton1 = tk.Radiobutton(radioframe, text="選択肢1", variable=radio, value="選択肢1")
+		radiobutton2 = tk.Radiobutton(radioframe, text="選択肢2", variable=radio, value="選択肢2")
+		radiobutton3 = tk.Radiobutton(radioframe, text="選択肢3", variable=radio, value="選択肢3")
+		
+		radiobutton1.pack()
+		radiobutton2.pack()
+		radiobutton3.pack()
+		
+		radioframe.place(x=100, y=200)
+		```			
+		
+		ボタンが押された際に、どのラジオボタンが選択されているかどうかは変数`radio`の`get`メソッドを呼ぶことで取得できます。
+		
+		```python
+		def sub():
+			print(f"{radio.get()}が選択されています")
+		```	
+		
+	- リストボックス
+	
+		複数の選択文字列のリストを作成し、データを選択する部品（ウェジェット）をリストボックスといいます。
+		
+		ウィンドウにリストボックスを追加するには「リストボックス(ListBox)」という部品（ウィジェット）を作成します。
+		
+		まず、選択文字列のリストをリストまたはタプルで作成します。
+		次に、そのリストまたはタプルを引数`value`に指定して、`tk.StringValue()`を実行し変数`listvar`に設定します。
+		この変数`listvar`を`tk.Listbox()`の引数`listvariable`に指定して実行し、変数`listbox`に設定します。
+		
+		```python
+		items = ['りんご', 'いちご', 'バナナ']
+		listvar = tk.StringVar(value=items)
+		listbox = tk.Listbox(listvariable=listvar)
+		```
+		
+		作成したリストボックスをウィンドウに配置するには`place`メソッドで引数`x`、`y`により位置を指定します。
+		
+		```python
+		listbox.place(x=100, y=200)
+		```
+		
+		ボタンが押された際に、どのリストが選択されているかどうかは、`listbox`の`curselection`メソッドで取得できます。
+		この際、戻り値は選択番号が入ったタプルになり、選択されてない場合は空、リストボックス作成時に`selectmode`を"multiple"に設定した場合は複数の値が入ります。
+		`selectmode`を指定しなければ、1個しか選択できないのでタプルの先頭の値になります。
+		
+		リストの内容は`listbox`の`get`メソッドで取得できるので、選択されている文字列は`listbox.get(listbox.curselection[0])`で取得できることになります。
+		
+		選択されていない場合も考慮すると、ボタンを押されたら選択内容を表示するには以下のようなコードになります。
+		
+		```python
+		def sub():
+    		selected = listbox.curselection()
+    		if len(selected) == 0:
+        		print("選ばれていません")
+    		else:
+        		print(f"{listbox.get(selected[0])}が選択されています")
+        ```
+        
+        リストの高さのデフォルトは10なので、例えばリストの数に合わせるには`tk.Listbox()`の引数`に`height=len(items)`を追加する必要があります。
+        
+        リストの幅のデフォルトは20なので、例えばリストの一番大きい文字列の文字数に合わせるには、tk.Listbox()`の引数`に`height=max([len(i)*2 for i in items])`を追加する必要があります。（日本語の場合、2倍する必要があります）
+        
+        リストの数が多すぎる場合、スクロールバーを設定し、リストボックスとフレームにまとまることで、スクロールバーが設定されたリストボックスを設定することもできます。
+        以下にリストボックスに縦スクロールバーを設置したプログラムの例を記載します。
+        
+		```python
+		import tkinter as tk
+		from tkinter import ttk
+		
+		root = tk.Tk()
+		root.title("GUIテスト")
+		root.geometry("500x300")
+		
+		def sub():
+    		selected = listbox.curselection()
+    		if len(selected) == 0:
+        		print("選ばれていません")
+    		else:
+        		print(f"{listbox.get(selected[0])}が選択されています")
+        
+		btn = tk.Button(text="押してください", command=sub)
+		btn.place(x=100, y=50)
+
+		items = ['北海道', '青森', '岩手', '秋田', '宮城', '山形', '福島', '茨城', '栃木', '群馬', '埼玉', '千葉', '東京', '神奈川']
+		listvar = tk.StringVar(value=items)
+
+		listframe = tk.Frame()
+		listbox = tk.Listbox(listframe, listvariable=listvar, height=6)
+
+		scrollbar = ttk.Scrollbar(listframe, orient='vertical', command=listbox.yview)
+		listbox['yscrollcommand'] = scrollbar
+		
+		listbox.pack(side='left')
+		scrollbar.pack(side='right', fill='both')
+		listframe.place(x=100, y=100)
+		
+		root.mainloop()
+		```
+		
 ## 演習
 
 それでは実際に**jupyter notebook**を使用して、演習を行います。
@@ -179,5 +369,49 @@ Pythonプログラムを学び始めた方向けの演習ドリルです。
 ## まとめ
 
 今回はPython演習として、GUIの演習を行いました。
+
+チェックボックスやラジオボックスを使えば、以下のように4択のクイズ問題アプリなどを簡単に作ることができます。
+
+```python
+import tkinter as tk
+
+root = tk.Tk()
+root.title("４択クイズ")
+root.geometry("400x150")
+
+def sub():
+	if radio.get() == "岩手県":
+		label2.configure(text="結果は正解！！")
+	else:
+		label2.configure(text="結果は不正解")
+	
+label = tk.Label(text="ドジャースの大谷選手の出身都道府県はどこでしょう")
+label.place(x=10, y=10)
+       
+radioframe = tk.Frame()
+radio = tk.StringVar()
+		
+radiobutton1 = tk.Radiobutton(radioframe, text="北海道", variable=radio, value="北海道")
+radiobutton2 = tk.Radiobutton(radioframe, text="青森県", variable=radio, value="青森県")
+radiobutton3 = tk.Radiobutton(radioframe, text="岩手県", variable=radio, value="岩手県")
+radiobutton4 = tk.Radiobutton(radioframe, text="宮城県", variable=radio, value="宮城県")
+		
+radiobutton1.pack(side="left")
+radiobutton2.pack(side="left")
+radiobutton3.pack(side="left")
+radiobutton4.pack(side="left")
+		
+radioframe.place(x=10, y=40)
+		
+btn = tk.Button(text="答え合わせ", command=sub)
+btn.place(x=100, y=70)
+		
+label2 = tk.Label(text="結果は")
+label2.place(x=100, y=120)	
+		
+root.mainloop()
+```
+
+演習の内容と、演習で使わなかったGUI部品も組み合わせていろいろなアプリを作ってみましょう。
 
 今後も新しい演習問題を追加していきますので、演習を通じてPythonを学んでいきましょう。
